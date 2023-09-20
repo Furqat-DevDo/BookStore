@@ -27,7 +27,7 @@ public interface IBookManager
     Task<BookModel> GetBookByIdAsync(int id);
     Task<BookModel> GetBookByNameAsync(string name);
     Task<BookModel> GetBookByWriterId(int id);
-    Task<List<BookModel>> GetBooksAsync();
+    Task<IEnumerable<BookModel>> GetBooksAsync();
 }
 
 
