@@ -4,5 +4,4 @@ namespace Books.Core.Entities;
 public class Genre : BaseEntity
 {
     public required  string Name { get; set; }
-    public int Id { get; set; }
 }
