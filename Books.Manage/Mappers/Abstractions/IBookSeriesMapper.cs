@@ -6,12 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Books.Manage.Mappers.Abstractions
+namespace Books.Manage.Mappers.Abstractions;
+
+public interface IBookSeriesMapper
 {
-    public interface IBookSeriesMapper
-    {
-        BookSeries Enter(CreateBookSeriesModel model);
-        BookSeriesModel ToModel(BookSeries entity);
-        BookSeries Update(BookSeries entity, CreateBookSeriesModel seriesModel);
-    }
+    BookSeries Enter(CreateBookSeriesModel model);
+    BookSeriesModel ToModel(BookSeries entity);
+    BookSeries Update(BookSeries entity, CreateBookSeriesModel seriesModel);
 }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Books.Manage.Helpers.Exceptions;
 
-namespace Books.Manage.Helpers.Exceptions
+public class BookSeriesNotFoundExcecption : Exception
 {
-    internal class BookSeriesNotFoundExcecption
-    {
-    }
+    public BookSeriesNotFoundExcecption(string message) : base(message) { }
 }

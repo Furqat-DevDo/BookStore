@@ -77,7 +77,7 @@ public class BookManager  : IBookManager
        return _mapper.ToModel(book);
     }
 
-    public async Task<BookModel> GetBookByWriterId(int id)
+    public async Task<BookModel> GetBookByWriterIdAsync(int id)
     {
         await _guardian.GuardAgainstZero(id);
         await _guardian.GuardAgainstMinus(id);

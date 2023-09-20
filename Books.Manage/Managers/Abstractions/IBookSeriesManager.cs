@@ -1,11 +1,4 @@
-﻿using Books.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Books.Manage.Managers.Abstractions;
+﻿namespace Books.Manage.Managers.Abstractions;
 
 public class BookSeriesModel
 {
@@ -23,10 +16,10 @@ public record CreateBookSeriesModel(string Name,
 public interface IBookSeriesManager
 {
     Task<BookSeriesModel> CreateBookSeriesAsync(CreateBookSeriesModel model);
-    Task<BookSeriesModel> UpdateBookSeriesAsync(CreateBookSeriesModel model);
-    Task<bool> DeleteBookSeriesById(int id);
-    Task<BookSeriesModel> GetBookSeriesById(int id);
-    Task<BookSeriesModel> GetBookSeriesByName(string name);
-    Task<BookSeriesModel> GetBookSeriesByWriterId(int id);
-    Task<BookSeriesModel> GetBookSeriesByBookId(int id);
+    Task<BookSeriesModel> UpdateBookSeriesAsync(int id, CreateBookSeriesModel model);
+    Task<bool> DeleteBookSeriesByIdAsync(int id);
+    Task<BookSeriesModel> GetBookSeriesByIdAsync(int id);
+    Task<BookSeriesModel> GetBookSeriesByNameAsync(string name);
+    Task<BookSeriesModel> GetBookSeriesByWriterIdAsync(int id);
+    Task<BookSeriesModel> GetBookSeriesByBookIdAsync(int id);
 }

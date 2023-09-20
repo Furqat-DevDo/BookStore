@@ -26,7 +26,7 @@ public interface IBookManager
     Task<bool> DeleteBookAsync(int id);
     Task<BookModel> GetBookByIdAsync(int id);
     Task<BookModel> GetBookByNameAsync(string name);
-    Task<BookModel> GetBookByWriterId(int id);
+    Task<BookModel> GetBookByWriterIdAsync(int id);
     Task<List<BookModel>> GetBooksAsync();
 }
 
