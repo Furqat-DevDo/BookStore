@@ -22,4 +22,4 @@ public class BookFileDto
     public DateTime CreatedDate { get; set; }
     public DateTime UpdateDate { get; set;}
 }
-public record CreateBookFile(Guid Id,int BookId, string Path, string FileExtension);
+public record CreateBookFile(Guid Id,int BookId,float Size, string Path, string FileExtension);

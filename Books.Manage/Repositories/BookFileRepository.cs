@@ -1,26 +1,35 @@
 ﻿using Books.Core.Data;
 using Books.Core.Entities;
+using Books.Manage.Helpers.FileHelper;
 using Books.Manage.Mappers.Abstractions;
 using Books.Manage.Repositories.Abstarctions;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+
 
 namespace Books.Manage.Repositories;
 
 public class BookFileRepository : IBookFileRepository
 {
     private readonly BookDbContext _dbConetxt;
+    private static FileHelper _helper;
 
-    public Task<BookFile> CreateBookFileAsync(BookFile bookFileDto)
+    public BookFileRepository(BookDbContext dbConetxt, FileHelper helper)
+    {
+        _dbConetxt = dbConetxt;
+        _helper = helper;
+    }
+
+    public async Task<int> CreateBookFileAsync(BookFile bookFile, IFormFile fromfile)
+    {
+         
+    }
+
+    public Task<bool> DeleteBookFileAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> DeleteBookFileAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<BookFile> GetBookFileAsync(Guid id)
+    public Task<BookFile> GetBookFileAsync(int id)
     {
         throw new NotImplementedException();
     }
@@ -30,8 +39,8 @@ public class BookFileRepository : IBookFileRepository
         throw new NotImplementedException();
     }
 
-    public Task<BookFile> UpdateBookFileAsync(Guid id, BookFile bookFileDto)
+    public Task<bool> UpdateBookFileAsync(int id, BookFile bookFile)
     {
-        throw new NotImplementedException();
+        
     }
 }

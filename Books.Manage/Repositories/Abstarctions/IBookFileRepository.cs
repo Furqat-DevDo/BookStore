@@ -1,14 +1,14 @@
 ﻿
 using Books.Core.Entities;
-using Books.Manage.Mappers.Abstractions;
+using Microsoft.AspNetCore.Http;
 
 namespace Books.Manage.Repositories.Abstarctions;
 
 public interface IBookFileRepository
 {
-    Task<BookFile> GetBookFileAsync(Guid id);
+    Task<BookFile> GetBookFileAsync(int id);
     Task<ICollection<BookFile>> GetBookFilesAsync();
-    Task<BookFile> CreateBookFileAsync(BookFile bookFile);
-    Task<BookFile> UpdateBookFileAsync(Guid id, BookFile bookFile);
-    Task<bool> DeleteBookFileAsync(Guid id);
+    Task<int> CreateBookFileAsync(BookFile bookFile, IFormFile formfile);
+    Task<bool> UpdateBookFileAsync(int id, BookFile bookFile);
+    Task<bool> DeleteBookFileAsync(int id);
 }

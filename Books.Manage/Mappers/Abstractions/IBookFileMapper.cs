@@ -5,6 +5,7 @@ namespace Books.Manage.Mappers.Abstractions;
 
 public interface IBookFileMapper
 {
-    BookFileDto MapToDto(BookFile bookFile);
-    BookFile MapToEntity(BookFileDto bookFileDto);
+    BookFileDto MapToDto(CreateBookFile bookFile);
+    BookFileDto MapToEntity(BookFile bookFileDto);
+    BookFile Update(BookFile bookFile, CreateBookFile bookFileModel);
 }

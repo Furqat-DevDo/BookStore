@@ -1,48 +1,49 @@
 ﻿using Books.Core.Entities;
 using Books.Manage.Managers.Abstractions;
 using Books.Manage.Mappers.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Books.Manage.Mappers.Abstractions.IBookFileMapper;
+
 
 namespace Books.Manage.Mappers;
 
 public class BookFileMapper:IBookFileMapper
 {
-    public BookFileDto MapToDto(BookFile bookFile)
+    public BookFileDto MapToDto(CreateBookFile bookFile)
     {
-        if (bookFile is null)
+        var filemodel = new BookFileDto
         {
-            return null;
-        }
-
-        return new BookFileDto
-        {
-            Id = bookFile.Id,
+            FileExtension = bookFile.FileExtension,
             Path = bookFile.Path,
             Size = bookFile.Size,
-            FileExtension = bookFile.FileExtension,
-
+            BookId = bookFile.BookId
         };
+
+
+        return filemodel;
     }
 
-    public BookFile MapToEntity(BookFileDto bookFileDto)
-    {
-        if (bookFileDto is null)
-        {
-            return null;
-        }
 
-        return new BookFile
-        {
-            Id = bookFileDto.Id,
-            Path = bookFileDto.Path,
-            Size = bookFileDto.Size,
-            FileExtension = bookFileDto.FileExtension
-            // Boshqa maydonlarni kerak bo'lsa ularni ham ko'chirishingiz mumkin
+    public BookFileDto MapToEntity(BookFile entity)
+    {
+        var file = new BookFileDto
+        { 
+            Id=entity.Id,
+            Path=entity.Path,
+            Size=entity.Size,
+            FileExtension = entity.FileExtension,
+            BookId = entity.BookId
         };
+
+        return file;
+    }
+
+    public BookFile Update(BookFile bookFile, CreateBookFile bookFileModel)
+    {
+        bookFile.FileExtension = bookFileModel.FileExtension;
+        bookFile.Path = bookFileModel.Path;
+        bookFile.Size = bookFileModel.Size;
+        bookFile.BookId = bookFileModel.BookId;
+        bookFile.Id = bookFileModel.Id;
+
+        return bookFile;
     }
 }

@@ -1,21 +1,27 @@
 ﻿
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace Books.Manage.Helpers.FileHelper;
 
 public class FileHelper
 {
-    private readonly string destination;
-
+    private static string destination;
+    private static ILoggerFactory _loggerFactory = new LoggerFactory();
     public FileHelper(string destinationPath)
     {
         destination = destinationPath;
     }
 
-    public async Task<(string, Guid)> SaveFormFileAsync(IFormFile formFile)
+    public static async Task<(string, Guid)> SaveFormFileAsync(IFormFile formFile)
     {
-        if (formFile == null)
-            throw new ArgumentNullException(nameof(formFile));
+        if (formFile is null)
+        {
+            var logger = _loggerFactory.CreateLogger("File");
+            logger.LogError("Form file is null.");
+            throw new ArgumentNullException(nameof(formFile)); ;
+
+        }
 
         if (!Directory.Exists(destination))
         {
@@ -35,9 +41,12 @@ public class FileHelper
 
     public async Task<byte[]> ReadFileFromPathAsync(string filePath)
     {
-        if (filePath is null)
-            throw new ArgumentNullException(nameof(filePath));
-
+        if (filePath == null || !File.Exists(filePath))
+        {
+            var logger = _loggerFactory.CreateLogger("FileOperations");
+            logger.LogError("File path is invalid or does not exist.");
+            throw new ArgumentException("Invalid file path.", nameof(filePath));
+        }
         byte[] byteArray = new byte[0];
 
         try
@@ -46,7 +55,9 @@ public class FileHelper
         }
         catch (Exception ex)
         {
-            Console.WriteLine("An error occurred: " + ex.Message);
+            var logger = _loggerFactory.CreateLogger("FileOperations");
+            logger.LogError(ex, "An error occurred while reading the file.");
+            throw new ArgumentException("Invalid file path.", nameof(filePath));
         }
 
         return byteArray;
