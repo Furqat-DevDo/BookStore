@@ -12,11 +12,11 @@ public class BookManager  : IBookManager
     private readonly ILogger<BookManager> _logger;
     private readonly IGuardian _guardian;
     private readonly IBookMapper _mapper;
-    private readonly IBookRepository _repository;
+    private readonly IBookFileRepository _repository;
 
     public BookManager(ILogger<BookManager> logger, 
         IGuardian guardian, 
-        IBookMapper mapper, IBookRepository repository)
+        IBookMapper mapper, IBookFileRepository repository)
     {
         _logger = logger;
         _guardian = guardian;
