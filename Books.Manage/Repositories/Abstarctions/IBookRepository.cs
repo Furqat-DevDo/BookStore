@@ -5,4 +5,5 @@ namespace Books.Manage.Repositories.Abstarctions;
 
 public interface IBookRepository : IGenericRepository<Book,BookDbContext>
 {
+    
 }
