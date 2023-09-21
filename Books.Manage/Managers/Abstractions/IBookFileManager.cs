@@ -7,8 +7,8 @@ public interface IBookFileManager
 {
     Task<BookFileModel> CreateBookFileAsync(CreateBookFile bookFile);
     Task<bool> DeleteBookFileAsync(int id);
-    //Task<BookFileModel> GetBookFileInfoAsync(int id);
-    Task<(byte[] bytes, string[] fileInfo)> GetBookFileAsync(int id);
+    Task<BookFileModel> GetBookFileInfoAsync(int id);
+    Task<(byte[] bytes, string[] fileInfo)> DownloadBookFileAsync(int id);
 }
 public class BookFileModel
 {
@@ -16,7 +16,6 @@ public class BookFileModel
     public required string Path { get; set; }
     public float Size { get; set; }
     public int BookId { get; set; }
-    public virtual Book? Book { get; set; }
     public required string FileExtension { get; set; }
     public DateTime CreatedDate { get; set; }
 }

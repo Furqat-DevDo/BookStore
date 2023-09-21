@@ -9,19 +9,21 @@ namespace Books.Manage.Managers;
 
 public class BookManager  : IBookManager
 {
-    private readonly ILogger<BookManager> _logger;
     private readonly IGuardian _guardian;
     private readonly IBookMapper _mapper;
     private readonly IBookRepository _repository;
+    private readonly IBookFileRepository _bookFileRepository;
 
-    public BookManager(ILogger<BookManager> logger, 
+    public BookManager(
         IGuardian guardian, 
-        IBookMapper mapper, IBookRepository repository)
+        IBookMapper mapper, 
+        IBookRepository repository,
+        IBookFileRepository bookFileRepository)
     {
-        _logger = logger;
         _guardian = guardian;
         _mapper = mapper;
         _repository = repository;
+        _bookFileRepository = bookFileRepository;
     }
 
     public async  Task<BookModel> CreateBookAsync(CreateBookModel model)
@@ -51,7 +53,8 @@ public class BookManager  : IBookManager
     {
         await _guardian.GuardAgainstZero(id);
         await _guardian.GuardAgainstMinus(id);
-
+        
+        await _bookFileRepository.DeleteBookFileAsync(id);
         return await _repository.DeleteById(id);
     }
 

@@ -1,9 +1,7 @@
 ﻿using Books.Core.Data;
 using Books.Core.Entities;
-using Books.Manage.Helpers.FileHelper;
-using Books.Manage.Mappers.Abstractions;
+using Books.Manage.Helpers.Exceptions;
 using Books.Manage.Repositories.Abstarctions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace Books.Manage.Repositories;
@@ -32,23 +30,22 @@ public class BookFileRepository : IBookFileRepository
         var bookFile = await _dbConetxt.BookFiles.FirstOrDefaultAsync(f => f.BookId == book.Id);
         if (bookFile is null) return false;
 
-        
+        bookFile.IsDeleted = true;
+        File.Delete(bookFile.Path);
 
+        _dbConetxt.BookFiles.Update(bookFile);
         return await _dbConetxt.SaveChangesAsync() > 0;
     }
 
-    public Task<BookFile> GetBookFileAsync(int id)
+    public async Task<BookFile> GetBookFileAsync(int id)
     {
-        throw new NotImplementedException();
-    }
+        var book = await _dbConetxt.Books.FirstOrDefaultAsync(b => b.Id == id);
+        if (book is null)
+        {
+            throw new BookNotFoundException();
+        }
 
-    public Task<ICollection<BookFile>> GetBookFilesAsync()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<bool> UpdateBookFileAsync(int id, BookFile bookFile)
-    {
-        
+        var bookFile = await _dbConetxt.BookFiles.FirstOrDefaultAsync(f => f.BookId == book.Id);
+        return bookFile;
     }
 }
