@@ -1,4 +1,5 @@
 ﻿using Books.Core.Entities;
+using Books.Manage.Helpers.FileHelper;
 using Books.Manage.Managers.Abstractions;
 using Books.Manage.Mappers.Abstractions;
 
@@ -7,43 +8,31 @@ namespace Books.Manage.Mappers;
 
 public class BookFileMapper:IBookFileMapper
 {
-    public BookFileDto MapToDto(CreateBookFile bookFile)
+    public BookFileModel ToModel(BookFile book)
     {
-        var filemodel = new BookFileDto
+        var filemodel = new BookFileModel
         {
-            FileExtension = bookFile.FileExtension,
-            Path = bookFile.Path,
-            Size = bookFile.Size,
-            BookId = bookFile.BookId
+            Path = book.Path,
+            FileExtension = book.FileExtension,
+            Size = book.Size,
+            BookId = book.BookId,
+            CreatedDate = book.CreatedDate,
         };
-
 
         return filemodel;
     }
 
-
-    public BookFileDto MapToEntity(BookFile entity)
+    public async Task<BookFile> ToEntity(CreateBookFile bookFile)
     {
-        var file = new BookFileDto
-        { 
-            Id=entity.Id,
-            Path=entity.Path,
-            Size=entity.Size,
-            FileExtension = entity.FileExtension,
-            BookId = entity.BookId
+        var (filePath, fileExt, fileId) = await FileHelper.SaveFileAsync(bookFile.File);
+        return new BookFile
+        {
+            Id = fileId,
+            BookId = bookFile.BookId,
+            Path = filePath,
+            Size = bookFile.File.Length,
+            FileExtension = fileExt,
+            CreatedDate = DateTime.UtcNow
         };
-
-        return file;
-    }
-
-    public BookFile Update(BookFile bookFile, CreateBookFile bookFileModel)
-    {
-        bookFile.FileExtension = bookFileModel.FileExtension;
-        bookFile.Path = bookFileModel.Path;
-        bookFile.Size = bookFileModel.Size;
-        bookFile.BookId = bookFileModel.BookId;
-        bookFile.Id = bookFileModel.Id;
-
-        return bookFile;
     }
 }

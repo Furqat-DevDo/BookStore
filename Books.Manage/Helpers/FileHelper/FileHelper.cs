@@ -4,16 +4,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Books.Manage.Helpers.FileHelper;
 
-public class FileHelper
+public static class FileHelper
 {
-    private static string destination;
+    private static string destination = "./Files";
     private static ILoggerFactory _loggerFactory = new LoggerFactory();
-    public FileHelper(string destinationPath)
-    {
-        destination = destinationPath;
-    }
 
-    public static async Task<(string, Guid)> SaveFormFileAsync(IFormFile formFile)
+    public static async Task<(string, string, Guid)> SaveFileAsync(IFormFile formFile)
     {
         if (formFile is null)
         {
@@ -36,10 +32,10 @@ public class FileHelper
         using FileStream destinationStream = File.Create(destinationFilePath);
         await formFile.CopyToAsync(destinationStream);
 
-        return (destinationFilePath, fileId);
+        return (destinationFilePath, fileExtension, fileId);
     }
 
-    public async Task<byte[]> ReadFileFromPathAsync(string filePath)
+    public static async Task<byte[]> ReadFileAsync(string filePath)
     {
         if (filePath == null || !File.Exists(filePath))
         {

@@ -12,11 +12,11 @@ public class BookManager  : IBookManager
     private readonly ILogger<BookManager> _logger;
     private readonly IGuardian _guardian;
     private readonly IBookMapper _mapper;
-    private readonly IBookFileRepository _repository;
+    private readonly IBookRepository _repository;
 
     public BookManager(ILogger<BookManager> logger, 
         IGuardian guardian, 
-        IBookMapper mapper, IBookFileRepository repository)
+        IBookMapper mapper, IBookRepository repository)
     {
         _logger = logger;
         _guardian = guardian;
@@ -96,6 +96,5 @@ public class BookManager  : IBookManager
         
         return !books.Any() ? new List<BookModel>()
             : books.Select(_mapper.ToModel).ToList();
-    }
-    
+    }  
 }

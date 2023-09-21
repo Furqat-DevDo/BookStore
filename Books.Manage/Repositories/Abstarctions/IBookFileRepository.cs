@@ -7,8 +7,6 @@ namespace Books.Manage.Repositories.Abstarctions;
 public interface IBookFileRepository
 {
     Task<BookFile> GetBookFileAsync(int id);
-    Task<ICollection<BookFile>> GetBookFilesAsync();
-    Task<int> CreateBookFileAsync(BookFile bookFile, IFormFile formfile);
-    Task<bool> UpdateBookFileAsync(int id, BookFile bookFile);
+    Task<BookFile> CreateBookFileAsync(BookFile bookFile);
     Task<bool> DeleteBookFileAsync(int id);
 }

@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Books.Core\Books.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Files\" />
+  </ItemGroup>
+
 </Project>
