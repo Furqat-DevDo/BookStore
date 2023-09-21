@@ -1,4 +1,6 @@
-﻿using Books.Manage.Helpers.Exceptions;
+﻿using Books.Core.Data;
+using Books.Core.Entities;
+using Books.Manage.Helpers.Exceptions;
 using Books.Manage.Helpers.Validators;
 using Books.Manage.Managers.Abstractions;
 using Books.Manage.Mappers.Abstractions;
@@ -12,11 +14,12 @@ public class BookManager  : IBookManager
     private readonly ILogger<BookManager> _logger;
     private readonly IGuardian _guardian;
     private readonly IBookMapper _mapper;
-    private readonly IBookRepository _repository;
+    private readonly IGenericRepository<Book,BookDbContext> _repository;
 
     public BookManager(ILogger<BookManager> logger, 
         IGuardian guardian, 
-        IBookMapper mapper, IBookRepository repository)
+        IBookMapper mapper, 
+        IGenericRepository<Book,BookDbContext> repository)
     {
         _logger = logger;
         _guardian = guardian;

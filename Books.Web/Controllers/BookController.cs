@@ -23,4 +23,9 @@ public class BookController : Controller
     {
         return View();
     }
+
+    public IActionResult Contact()
+    {
+        return View();
+    }
 }
