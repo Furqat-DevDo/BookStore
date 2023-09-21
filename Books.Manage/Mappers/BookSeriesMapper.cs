@@ -6,7 +6,7 @@ namespace Books.Manage.Mappers;
 
 public class BookSeriesMapper : IBookSeriesMapper
 {
-    public BookSeries Enter(CreateBookSeriesModel model)
+    public BookSeries ToEntity(CreateBookSeriesModel model)
     {
         var bookSeries = new BookSeries
         {

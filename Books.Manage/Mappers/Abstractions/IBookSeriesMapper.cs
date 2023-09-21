@@ -10,7 +10,7 @@ namespace Books.Manage.Mappers.Abstractions;
 
 public interface IBookSeriesMapper
 {
-    BookSeries Enter(CreateBookSeriesModel model);
+    BookSeries ToEntity(CreateBookSeriesModel model);
     BookSeriesModel ToModel(BookSeries entity);
     BookSeries Update(BookSeries entity, CreateBookSeriesModel seriesModel);
 }

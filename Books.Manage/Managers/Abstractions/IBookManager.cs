@@ -1,6 +1,6 @@
 ﻿namespace Books.Manage.Managers.Abstractions;
 
-public class BookModel
+public record BookModel
 {
     public int Id { get; set; }
     public required string Name { get; set; }
@@ -26,8 +26,8 @@ public interface IBookManager
     Task<bool> DeleteBookAsync(int id);
     Task<BookModel> GetBookByIdAsync(int id);
     Task<BookModel> GetBookByNameAsync(string name);
-    Task<BookModel> GetBookByWriterIdAsync(int id);
-    Task<List<BookModel>> GetBooksAsync();
+    Task<BookModel> GetBookByWriterId(int id);
+    Task<IEnumerable<BookModel>> GetBooksAsync();
 }
 
 

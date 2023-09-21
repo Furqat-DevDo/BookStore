@@ -1,14 +1,9 @@
-﻿using Books.Core.Entities;
+﻿using Books.Core.Data;
+using Books.Core.Entities;
 using System.Linq.Expressions;
 
 namespace Books.Manage.Repositories.Abstarctions;
 
-public interface IBookSeriesRepository
+public interface IBookSeriesRepository : IGenericRepository<BookSeries, BookDbContext>
 {
-    Task<BookSeries?> GetById(int id);
-    Task<List<BookSeries>> GetAll();
-    Task<bool> DeleteById(int id);
-    Task<BookSeries> CreateBookSeries(BookSeries model);
-    Task<BookSeries> UpdateBookSeries(BookSeries model);
-    Task<BookSeries?> GetBookSeriesByFilter(Expression<Func<BookSeries, bool>> predicate);
 }

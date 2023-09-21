@@ -1,4 +1,5 @@
-﻿using Books.Manage.Helpers.Exceptions;
+﻿using Books.Core.Entities;
+using Books.Manage.Helpers.Exceptions;
 using Books.Manage.Helpers.Validators;
 using Books.Manage.Managers.Abstractions;
 using Books.Manage.Mappers.Abstractions;
@@ -27,9 +28,21 @@ public class BookSeriesManager : IBookSeriesManager
     public async Task<BookSeriesModel> CreateBookSeriesAsync(CreateBookSeriesModel model)
     {
         await _guardian.GuardAgainstNull(model);
+        await _guardian.GuardAgainstNullOrEmptyString(model.Name);
+
+        var check = _seriesRepository.GetAsync(g => 
+        g.BookId == model.BookId && 
+        g.WriterId == model.WriterId);
+
+        if(check is null)
+        {
+            _logger.LogWarning("BookSeries Not found.");
+            throw new BookNotFoundException(nameof(check));
+            throw new WriterNotFoundException(nameof(check));
+        }
 
         var entity = await _seriesRepository
-            .CreateBookSeries(_mapper.Enter(model));
+            .AddAsync(_mapper.ToEntity(model));
 
         return _mapper.ToModel(entity);
     }
@@ -39,73 +52,105 @@ public class BookSeriesManager : IBookSeriesManager
         await _guardian.GuardAgainstZero(id);
         await _guardian.GuardAgainstMinus(id);
 
-        return await _seriesRepository.DeleteById(id);
+        var check = await _seriesRepository.GetAsync(g => g.Id == id);
+
+        if (check is null)
+        {
+            _logger.LogWarning("BookSeries Not found.");
+            throw new BookSeriesNotFoundException(nameof(check));
+        }
+
+        return await _seriesRepository.DeleteAsync(id);
     }
 
     public async Task<BookSeriesModel> GetBookSeriesByBookIdAsync(int id)
     {
-        _guardian.GuardAgainstZero(id);
-        _guardian.GuardAgainstMinus(id);
+        await _guardian.GuardAgainstZero(id);
+        await _guardian.GuardAgainstMinus(id);
 
-        var book = await _seriesRepository
-            .GetBookSeriesByFilter(s => s.BookId == id);
+        var bookSeries = await _seriesRepository
+            .GetAsync(s => s.BookId == id);
 
-        if (book is null)
-            throw new BookSeriesNotFoundExcecption(nameof(book));
+        if (bookSeries is null)
+        {
+            _logger.LogWarning("BookSeries Not found.");
+            throw new BookSeriesNotFoundException(nameof(bookSeries));
+        }           
 
-        return _mapper.ToModel(book);
+        return _mapper.ToModel(bookSeries);
     }
 
     public async Task<BookSeriesModel> GetBookSeriesByIdAsync(int id)
     {
-        _guardian.GuardAgainstZero(id);
-        _guardian.GuardAgainstMinus(id);
+        await _guardian.GuardAgainstZero(id);
+        await _guardian.GuardAgainstMinus(id);
 
-        var bookSeries = await _seriesRepository.GetById(id);
+        var bookSeries = await _seriesRepository.GetAsync(g => g.Id == id);
 
         if(bookSeries is null)
-            throw new BookSeriesNotFoundExcecption(nameof(bookSeries));
+        {
+            _logger.LogWarning("BookSeries Not Found ");
+            throw new BookSeriesNotFoundException(nameof(bookSeries));
+        }         
 
         return _mapper.ToModel(bookSeries);
     }
 
     public async Task<BookSeriesModel> GetBookSeriesByNameAsync(string name)
     {
-        _guardian.GuardAgainstNullOrEmptyString(name);
+        await _guardian.GuardAgainstNullOrEmptyString(name);
         
         var series = await _seriesRepository
-            .GetBookSeriesByFilter(s => s.Name == name);
+            .GetAsync(s => s.Name == name);
 
         if (series is null)
-            throw new BookSeriesNotFoundExcecption(nameof(series));
+        {
+            _logger.LogWarning("BookSeries Not Found ");
+            throw new BookSeriesNotFoundException(nameof(series));
+        }            
 
         return _mapper.ToModel(series);
     }
 
     public async Task<BookSeriesModel> GetBookSeriesByWriterIdAsync(int id)
     {
-        _guardian.GuardAgainstZero(id);
-        _guardian.GuardAgainstMinus(id);
+        await _guardian.GuardAgainstZero(id);
+        await _guardian.GuardAgainstMinus(id);
 
-        var book = await _seriesRepository
-            .GetBookSeriesByFilter(s => s.WriterId == id);
+        var bookSeries = await _seriesRepository
+            .GetAsync(s => s.WriterId == id);
 
-        if (book is null)
-            throw new BookSeriesNotFoundExcecption(nameof(book));
+        if (bookSeries is null)
+        {
+            _logger.LogWarning("BookSeries Not Found ");
+            throw new BookSeriesNotFoundException(nameof(bookSeries));
+        }
 
-        return _mapper.ToModel(book);
+        return _mapper.ToModel(bookSeries);
     }
 
     public async Task<BookSeriesModel> UpdateBookSeriesAsync(int id,
         CreateBookSeriesModel model)
     {
         await _guardian.GuardAgainstNull(model);
-        var updateBookSeries = await _seriesRepository.GetById(id);
 
-        if (updateBookSeries is null) 
-            throw new BookSeriesNotFoundExcecption(nameof(updateBookSeries));
+        var updateBookSeries = await _seriesRepository.GetAsync(g => g.Id == id);
 
-        var entity = await _seriesRepository.UpdateBookSeries(
+        var check = _seriesRepository.GetAsync(g =>
+        g.Id == id &&
+        g.Name == model.Name &&
+        g.BookId == model.BookId &&
+        g.WriterId == model.WriterId);
+
+        if (check is null || updateBookSeries is null)
+        {
+            _logger.LogWarning("BookSeries Not Found ");
+            throw new BookSeriesNotFoundException(nameof(check));
+            throw new BookNotFoundException(nameof(check));
+            throw new WriterNotFoundException(nameof(check));
+        }           
+
+        var entity = await _seriesRepository.UpdateAsync(
             _mapper.Update(updateBookSeries,model));
 
         return _mapper.ToModel(entity);

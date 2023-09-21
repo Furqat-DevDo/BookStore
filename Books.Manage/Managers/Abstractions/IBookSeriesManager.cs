@@ -1,9 +1,9 @@
 ﻿namespace Books.Manage.Managers.Abstractions;
 
-public class BookSeriesModel
+public record BookSeriesModel
 {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string? Name { get; set; }
     public int BookId { get; set; }
     public int WriterId { get; set; }
     public DateTime CreatedDateTime { get; set; }
