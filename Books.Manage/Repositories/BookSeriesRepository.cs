@@ -6,9 +6,11 @@ using System.Linq.Expressions;
 
 namespace Books.Manage.Repositories;
 
-public class BookRerpository : GenericRepository<Book,BookDbContext>,IBookRepository
+public class BookSeriesRepository : GenericRepository<BookSeries, BookDbContext>, IBookSeriesRepository
 {
-    public BookRerpository(BookDbContext dbConetxt)  : base(dbConetxt) {}
+    public BookSeriesRepository(BookDbContext tContext) : base(tContext)
+    {
+    }
 
     public override Task<bool> DeleteAsync(long Id)
     {
