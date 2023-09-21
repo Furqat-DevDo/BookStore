@@ -1,108 +1,139 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<title>Kindle : Home</title>
-	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/icon" href="images/favicon.ico"/>
-	<!-- Font Awesome -->
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-	<!-- Bootstrap -->
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<!-- Slick slider -->
-	<link href="css/slick.css" rel="stylesheet">
-	<!-- Theme color -->
-	<link id="switcher" href="css/theme-color/default-theme.css" rel="stylesheet">
-
-	<!-- Main Style -->
-	<link href="style.css" rel="stylesheet">
-
-	<!-- Fonts -->
-
-	<!-- Open Sans for body font -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700,800" rel="stylesheet">
-	<!-- Lato for Title -->
-	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
-
+    <title>Booke Colorlib Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    
 </head>
-<body>
-<header id="mu-header" class="" role="banner" >
-	<div class="container">
-		<nav class="navbar navbar-default mu-navbar">
-			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  
+<div class="site-wrap">
 
-					<!-- Text Logo -->
-					<a class="navbar-brand" href=""><i class="fa fa-book" aria-hidden="true"></i> Kindle</a>
+<div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+</div> <!-- .site-mobile-menu -->
+    
+<navbar>    
+<div class="site-navbar-wrap">
+    <div class="site-navbar site-navbar-target js-sticky-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-6 col-lg-3">
+                    <h1 class="my-0 site-logo"><a href="@Url.Action("Home","Book")">Booke</a></h1>
+                </div>
+                <div class="col-6 col-lg-9">
+                    <nav class="site-navigation text-right" role="navigation">
+                        <div class="container">
 
-					<!-- Image Logo -->
-					<!-- <a class="navbar-brand" href="index.html"><img src="assets/images/logo.png"></a> -->
+                            <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3 "><a href="#" class="site-menu-toggle js-menu-toggle text-black">
+                                <span class="icon-menu h3"></span>
+                            </a></div>
+
+                            <ul class="site-menu main-menu js-clone-nav d-none d-lg-block">
+                                <li><a href="@Url.Action("Home","Book")" class="nav-link">Home</a></li>
+                                <li><a href="#features-section" class="nav-link">Features</a></li>
+                                <li><a href="#about-section" class="nav-link">About Author</a></li>
+                                <li><a href="#testimonial-section" class="nav-link">Testimonial</a></li>
+                                <li><a href="@Url.Action("Contact","Book")" class="nav-link">Contact</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- END .site-navbar-wrap -->
+</navbar> 
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="row mb-5">
+                            <div class="col-12">
+                                <h3 class="footer-heading mb-4">About Us</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam blanditiis, vero voluptatum distinctio qui. Nostrum quibusdam, dolor unde sunt fugiat.</p>
+                            </div>
+                        </div>
 
 
-				</div>
 
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav mu-menu navbar-right">
-						<li><a href="#">HOME</a></li>
-						<li><a href="#mu-book-overview">BOOKS</a></li>
-						<li><a href="#mu-author">ABOUT</a></li>
-						<li><a href="#mu-pricing">AUTHORS</a></li>
-						<li><a href="#mu-testimonials">SEARCH</a></li>
-						<li><a href="#mu-contact">CONTACT</a></li>
-					</ul>
-				</div><!-- /.navbar-collapse -->
-			</div><!-- /.container-fluid -->
-		</nav>
-	</div>
-</header>
-	<div class="container">
-		<main role="main" class="pb-3">
-			@RenderBody()
-		</main>
-	</div>
+                    </div>
+                    <div class="col-lg-3 ml-auto">
 
-<footer id="mu-footer" role="contentinfo">
-	<div class="container">
-		<div class="mu-footer-area">
-			<div class="mu-social-media">
-				<a href="#"><i class="fa fa-facebook"></i></a>
-				<a href="#"><i class="fa fa-twitter"></i></a>
-				<a href="#"><i class="fa fa-google-plus"></i></a>
-				<a href="#"><i class="fa fa-linkedin"></i></a>
-			</div>
-			<p class="mu-copyright">&copy; Copyright <a rel="nofollow" href="http://markups.io">markups.io</a>. All right reserved.</p>
-		</div>
-	</div>
-</footer>
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<!-- Bootstrap -->
-<script src="js/bootstrap.min.js"></script>
-<!-- Slick slider -->
-<script type="text/javascript" src="js/slick.min.js"></script>
-<!-- Counter js -->
-<script type="text/javascript" src="js/counter.js"></script>
-<!-- Ajax contact form  -->
-<script type="text/javascript" src="js/app.js"></script>
+                        <div class="row mb-5">
+                            <div class="col-md-12">
+                                <h3 class="footer-heading mb-4">Navigation</h3>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">Book Author</a></li>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Team</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row pt-5 mt-5 text-center">
+                    <div class="col-md-12">
+                        <div class="mb-4">
+                            <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                            <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                            <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                            <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+                        </div>
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
    
- 
-	
-<!-- Custom js -->
-<script type="text/javascript" src="js/custom.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 
-@await RenderSectionAsync("Scripts", required: false)
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    <script src="js/stickyfill.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
 
+    <script src="js/jquery.fancybox.min.js"></script>
+    <script src="js/main.js"></script>
+</div>
 </body>
 </html>

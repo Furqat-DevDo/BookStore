@@ -8,14 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\ErrorModel.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Models\ErrorModel.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11">
       <PrivateAssets>all</PrivateAssets>
@@ -29,17 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
-    <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
-    <None Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
-    <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff2" />
-    <None Include="wwwroot\fonts\Simple-Line-Icons.svg" />
-    <None Include="wwwroot\fonts\Simple-Line-Icons.woff2" />
-    <None Include="wwwroot\js\app.js" />
-    <None Include="wwwroot\js\bootstrap.min.js" />
-    <None Include="wwwroot\js\counter.js" />
-    <None Include="wwwroot\js\custom.js" />
-    <None Include="wwwroot\js\slick.min.js" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
   </ItemGroup>
 
 </Project>
