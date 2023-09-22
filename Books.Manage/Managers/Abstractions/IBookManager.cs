@@ -1,6 +1,6 @@
 ﻿namespace Books.Manage.Managers.Abstractions;
 
-public class BookModel
+public record BookModel
 {
     public int Id { get; set; }
     public required string Name { get; set; }
