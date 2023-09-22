@@ -1,5 +1,4 @@
-﻿using Books.Core.Entities;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace Books.Manage.Managers.Abstractions;
 

@@ -3,7 +3,6 @@ using Books.Manage.Helpers.Validators;
 using Books.Manage.Managers.Abstractions;
 using Books.Manage.Mappers.Abstractions;
 using Books.Manage.Repositories.Abstarctions;
-using Microsoft.Extensions.Logging;
 
 namespace Books.Manage.Managers;
 
@@ -30,7 +29,7 @@ public class BookManager  : IBookManager
     {
         await _guardian.GuardAgainstNull(model);
         
-        var entity = await  _repository.AddAsync(
+        var entity = await  _repository.CreateBook(
             _mapper.ToEntity(model));
 
         return _mapper.ToModel(entity);
@@ -40,14 +39,10 @@ public class BookManager  : IBookManager
     {
         await _guardian.GuardAgainstNull(model);
 
-        var book = await  _repository.GetAsync(b=>b.Id == id);
-        if (book is null)
-        {
-            _logger.LogWarning("Book Not found.");
-            throw new BookNotFoundException(nameof(book));
-        }
+        var book = await  _repository.GetById(id);
+        if (book is null) throw new BookNotFoundException(nameof(book));
 
-        var entity = await _repository.UpdateAsync(
+        var entity = await _repository.UpdateBook(
             _mapper.Update(book,model));
 
         return _mapper.ToModel(entity);
@@ -67,13 +62,9 @@ public class BookManager  : IBookManager
         await _guardian.GuardAgainstZero(id);
         await _guardian.GuardAgainstMinus(id);
 
-        var book = await _repository.GetAsync(b => b.Id == id);
+        var book = await  _repository.GetById(id);
 
-        if (book is null)
-        {
-            _logger.LogWarning("Book Not Found.");
-            throw new BookNotFoundException(nameof(book));
-        }
+        if(book is null) throw new BookNotFoundException(nameof(book));
 
         return _mapper.ToModel(book);
     }
@@ -82,14 +73,8 @@ public class BookManager  : IBookManager
     {
        await _guardian.GuardAgainstNullOrEmptyString(name);
 
-       var book = await _repository.GetAsync(b => b.Name.Contains(name,
-           StringComparison.CurrentCultureIgnoreCase));
-
-       if (book is null)
-       {
-           _logger.LogWarning("Book Not Found");
-           throw new BookNotFoundException(nameof(book));
-       }
+       var book = await _repository.GetBookByFilter(b=>b.Name == name);
+       if (book is null) throw new BookNotFoundException(nameof(book));
 
        return _mapper.ToModel(book);
     }
@@ -99,24 +84,24 @@ public class BookManager  : IBookManager
         await _guardian.GuardAgainstZero(id);
         await _guardian.GuardAgainstMinus(id);
 
-        var book = await _repository.GetAsync(b => b.WriterId == id);
+        var book = await _repository.GetBookByFilter(b => b.WriterId == id);
 
-        if (book is null)
-        {
-            _logger.LogWarning("Book not Found.");
-            throw new BookNotFoundException(nameof(book));
-        }
+        if (book is null) throw new BookNotFoundException(nameof(book));
 
         return _mapper.ToModel(book);
     }
 
 
-    public async Task<IEnumerable<BookModel>> GetBooksAsync()
+    public async Task<List<BookModel>> GetBooksAsync()
     {
-        var books = await _repository.GetAllAsync();
+        var books = await _repository.GetAll();
         
-        return !books.Any() ? Enumerable.Empty<BookModel>()
-            : books.AsEnumerable().Select(_mapper.ToModel);
+        return !books.Any() ? new List<BookModel>()
+            : books.Select(_mapper.ToModel).ToList();
     }
-    
+
+    Task<IEnumerable<BookModel>> IBookManager.GetBooksAsync()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -9,4 +9,9 @@ public class BookRerpository : GenericRepository<Book,BookDbContext>,IBookReposi
 
     public BookRerpository(BookDbContext dbConetxt)  : base(dbConetxt)
     {}
+
+    public override Task<bool> DeleteAsync(long Id)
+    {
+        return base.DeleteAsync(Id);
+    }
 }
