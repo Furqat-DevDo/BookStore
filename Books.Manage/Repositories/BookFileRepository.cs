@@ -22,7 +22,7 @@ public class BookFileRepository : IBookFileRepository
         return result.Entity;
     }
 
-    public async Task<bool> DeleteBookFileAsync(int id)
+    public async Task<bool> DeleteBookFileAsync(long id)
     {
         var book = await _dbConetxt.Books.FirstOrDefaultAsync(b => b.Id == id);
         if (book is null) return false;
@@ -37,7 +37,7 @@ public class BookFileRepository : IBookFileRepository
         return await _dbConetxt.SaveChangesAsync() > 0;
     }
 
-    public async Task<BookFile> GetBookFileAsync(int id)
+    public async Task<BookFile> GetBookFileAsync(long id)
     {
         var book = await _dbConetxt.Books.FirstOrDefaultAsync(b => b.Id == id);
         if (book is null)

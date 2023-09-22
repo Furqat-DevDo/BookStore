@@ -9,14 +9,18 @@ public interface IBookFileManager
     Task<BookFileModel> GetBookFileInfoAsync(int id);
     Task<(byte[] bytes, string[] fileInfo)> DownloadBookFileAsync(int id);
 }
-public class BookFileModel
+public record BookFileModel
 {
-    public new Guid Id { get; set; }
-    public required string Path { get; set; }
-    public float Size { get; set; }
-    public int BookId { get; set; }
-    public required string FileExtension { get; set; }
-    public DateTime CreatedDate { get; set; }
+    public Guid Id { get; init; } 
+    public string Path { get; init; }
+    public float Size { get; init; }
+    public int BookId { get; init; }
+    public string FileExtension { get; init; }
+    public DateTime CreatedDate { get; init; }
 }
 
-public record CreateBookFile(int BookId, IFormFile File);
+public record CreateBookFile
+{
+    public int BookId { get; }
+    public IFormFile File { get; }
+}
