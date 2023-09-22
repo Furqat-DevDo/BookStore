@@ -1,4 +1,4 @@
-﻿using Books.Core.Entities;
+﻿ using Books.Core.Entities;
 using Books.Manage.Managers.Abstractions;
 
 namespace Books.Manage.Mappers.Abstractions;

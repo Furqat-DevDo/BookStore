@@ -1,4 +1,4 @@
-﻿using Books.Core.Entities.Abstractions;
+﻿ using Books.Core.Entities.Abstractions;
 
 namespace Books.Core.Entities;
 
