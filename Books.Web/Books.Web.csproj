@@ -25,4 +25,10 @@
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="forms\contact.php">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
