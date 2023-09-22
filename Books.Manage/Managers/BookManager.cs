@@ -9,17 +9,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Books.Manage.Managers;
 
-public class BookManager  : IBookManager
+public class BookManager : IBookManager
 {
     private readonly ILogger<BookManager> _logger;
     private readonly IGuardian _guardian;
     private readonly IBookMapper _mapper;
-    private readonly IGenericRepository<Book,BookDbContext> _repository;
+    private readonly IGenericRepository<Book, BookDbContext> _repository;
 
-    public BookManager(ILogger<BookManager> logger, 
-        IGuardian guardian, 
-        IBookMapper mapper, 
-        IGenericRepository<Book,BookDbContext> repository)
+    public BookManager(ILogger<BookManager> logger,
+        IGuardian guardian,
+        IBookMapper mapper,
+        IGenericRepository<Book, BookDbContext> repository)
     {
         _logger = logger;
         _guardian = guardian;
@@ -27,11 +27,11 @@ public class BookManager  : IBookManager
         _repository = repository;
     }
 
-    public async  Task<BookModel> CreateBookAsync(CreateBookModel model)
+    public async Task<BookModel> CreateBookAsync(CreateBookModel model)
     {
         await _guardian.GuardAgainstNull(model);
-        
-        var entity = await  _repository.AddAsync(
+
+        var entity = await _repository.AddAsync(
             _mapper.ToEntity(model));
 
         return _mapper.ToModel(entity);
@@ -41,7 +41,7 @@ public class BookManager  : IBookManager
     {
         await _guardian.GuardAgainstNull(model);
 
-        var book = await  _repository.GetAsync(b=>b.Id == id);
+        var book = await _repository.GetAsync(b => b.Id == id);
         if (book is null)
         {
             _logger.LogWarning("Book Not found.");
@@ -49,12 +49,12 @@ public class BookManager  : IBookManager
         }
 
         var entity = await _repository.UpdateAsync(
-            _mapper.Update(book,model));
+            _mapper.Update(book, model));
 
         return _mapper.ToModel(entity);
     }
 
-    public async  Task<bool> DeleteBookAsync(int id)
+    public async Task<bool> DeleteBookAsync(int id)
     {
         await _guardian.GuardAgainstZero(id);
         await _guardian.GuardAgainstMinus(id);
@@ -62,7 +62,7 @@ public class BookManager  : IBookManager
         return await _repository.DeleteAsync(id);
     }
 
-    public async  Task<BookModel> GetBookByIdAsync(int id)
+    public async Task<BookModel> GetBookByIdAsync(int id)
     {
         await _guardian.GuardAgainstZero(id);
         await _guardian.GuardAgainstMinus(id);
@@ -80,18 +80,18 @@ public class BookManager  : IBookManager
 
     public async Task<BookModel> GetBookByNameAsync(string name)
     {
-       await _guardian.GuardAgainstNullOrEmptyString(name);
+        await _guardian.GuardAgainstNullOrEmptyString(name);
 
-       var book = await _repository.GetAsync(b => b.Name.Contains(name,
-           StringComparison.CurrentCultureIgnoreCase));
+        var book = await _repository.GetAsync(b => b.Name.Contains(name,
+            StringComparison.CurrentCultureIgnoreCase));
 
-       if (book is null)
-       {
-           _logger.LogWarning("Book Not Found");
-           throw new BookNotFoundException(nameof(book));
-       }
+        if (book is null)
+        {
+            _logger.LogWarning("Book Not Found");
+            throw new BookNotFoundException(nameof(book));
+        }
 
-       return _mapper.ToModel(book);
+        return _mapper.ToModel(book);
     }
 
     public async Task<BookModel> GetBookByWriterId(int id)
@@ -114,9 +114,9 @@ public class BookManager  : IBookManager
     public async Task<IEnumerable<BookModel>> GetBooksAsync()
     {
         var books = await _repository.GetAllAsync();
-        
+
         return !books.Any() ? Enumerable.Empty<BookModel>()
             : books.AsEnumerable().Select(_mapper.ToModel);
     }
-    
+
 }
