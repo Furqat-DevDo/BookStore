@@ -1,6 +1,13 @@
-﻿namespace Books.Manage.Managers.Abstractions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Books.Manage.Managers.Abstractions;
 
 public record BookSeriesModel
+
 {
     public int Id { get; set; }
     public string? Name { get; set; }
@@ -9,6 +16,7 @@ public record BookSeriesModel
     public DateTime CreatedDateTime { get; set; }
     public DateTime? UpdatedDate { get; set; }
 }
+
 public record CreateBookSeriesModel(string Name,
     int BookId,
     int WriterId);
