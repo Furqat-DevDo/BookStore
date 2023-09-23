@@ -30,4 +30,5 @@ public interface IBookSeriesManager
     Task<BookSeriesModel> GetBookSeriesByNameAsync(string name);
     Task<BookSeriesModel> GetBookSeriesByWriterIdAsync(int id);
     Task<BookSeriesModel> GetBookSeriesByBookIdAsync(int id);
+    Task<IEnumerable<BookSeriesModel>> GetBooksAsync();
 }
