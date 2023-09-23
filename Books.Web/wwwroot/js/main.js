@@ -1,270 +1,268 @@
-/**
-* Template Name: MyResume
-* Updated: Sep 18 2023 with Bootstrap v5.3.2
-* Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-(function() {
-  "use strict";
 
-  /**
-   * Easy selector helper function
-   */
-  const select = (el, all = false) => {
-    el = el.trim()
-    if (all) {
-      return [...document.querySelectorAll(el)]
+$(document).ready(function(){
+	"use strict";
+
+	var window_width 	 = $(window).width(),
+	window_height 		 = window.innerHeight,
+	header_height 		 = $(".default-header").height(),
+	header_height_static = $(".site-header.static").outerHeight(),
+	fitscreen 			 = window_height - header_height;
+
+
+	$(".fullscreen").css("height", window_height)
+	$(".fitscreen").css("height", fitscreen);
+
+     if(document.getElementById("default-select")){
+          $('select').niceSelect();
+    };
+
+    $('.img-pop-up').magnificPopup({
+        type: 'image',
+        gallery:{
+        enabled:true
+        }
+    });
+
+
+    $('.play-btn').magnificPopup({
+        type: 'iframe',
+        mainClass: 'mfp-fade',
+        removalDelay: 160,
+        preloader: false,
+        fixedContentPos: false
+    });
+
+
+    //  Counter Js 
+
+    $('.counter').counterUp({
+        delay: 10,
+        time: 1000
+    });    
+
+
+  // Initiate superfish on nav menu
+  $('.nav-menu').superfish({
+    animation: {
+      opacity: 'show'
+    },
+    speed: 400
+  });
+
+  // Mobile Navigation
+  if ($('#nav-menu-container').length) {
+    var $mobile_nav = $('#nav-menu-container').clone().prop({
+      id: 'mobile-nav'
+    });
+    $mobile_nav.find('> ul').attr({
+      'class': '',
+      'id': ''
+    });
+    $('body').append($mobile_nav);
+    $('body').prepend('<button type="button" id="mobile-nav-toggle"><i class="lnr lnr-menu"></i></button>');
+    $('body').append('<div id="mobile-body-overly"></div>');
+    $('#mobile-nav').find('.menu-has-children').prepend('<i class="lnr lnr-chevron-down"></i>');
+
+    $(document).on('click', '.menu-has-children i', function(e) {
+      $(this).next().toggleClass('menu-item-active');
+      $(this).nextAll('ul').eq(0).slideToggle();
+      $(this).toggleClass("lnr-chevron-up lnr-chevron-down");
+    });
+
+    $(document).on('click', '#mobile-nav-toggle', function(e) {
+      $('body').toggleClass('mobile-nav-active');
+      $('#mobile-nav-toggle i').toggleClass('lnr-cross lnr-menu');
+      $('#mobile-body-overly').toggle();
+    });
+
+    $(document).click(function(e) {
+      var container = $("#mobile-nav, #mobile-nav-toggle");
+      if (!container.is(e.target) && container.has(e.target).length === 0) {
+        if ($('body').hasClass('mobile-nav-active')) {
+          $('body').removeClass('mobile-nav-active');
+          $('#mobile-nav-toggle i').toggleClass('lnr-cross lnr-menu');
+          $('#mobile-body-overly').fadeOut();
+        }
+      }
+    });
+  } else if ($("#mobile-nav, #mobile-nav-toggle").length) {
+    $("#mobile-nav, #mobile-nav-toggle").hide();
+  }
+
+  // Smooth scroll for the menu and links with .scrollto classes
+  $('.nav-menu a, #mobile-nav a, .scrollto').on('click', function() {
+    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      if (target.length) {
+        var top_space = 0;
+
+        if ($('#header').length) {
+          top_space = $('#header').outerHeight();
+
+          if( ! $('#header').hasClass('header-fixed') ) {
+            top_space = top_space;
+          }
+        }
+
+        $('html, body').animate({
+          scrollTop: target.offset().top - top_space
+        }, 1500, 'easeInOutExpo');
+
+        if ($(this).parents('.nav-menu').length) {
+          $('.nav-menu .menu-active').removeClass('menu-active');
+          $(this).closest('li').addClass('menu-active');
+        }
+
+        if ($('body').hasClass('mobile-nav-active')) {
+          $('body').removeClass('mobile-nav-active');
+          $('#mobile-nav-toggle i').toggleClass('lnr-times lnr-bars');
+          $('#mobile-body-overly').fadeOut();
+        }
+        return false;
+      }
+    }
+  });
+
+
+    $(document).ready(function() {
+
+    $('html, body').hide();
+
+        if (window.location.hash) {
+
+        setTimeout(function() {
+
+        $('html, body').scrollTop(0).show();
+
+        $('html, body').animate({
+
+        scrollTop: $(window.location.hash).offset().top
+
+        }, 1000)
+
+        }, 0);
+
+        }
+
+        else {
+
+        $('html, body').show();
+
+        }
+
+    });
+  
+
+  // Header scroll class
+  $(window).scroll(function() {
+    if ($(this).scrollTop() > 100) {
+      $('#header').addClass('header-scrolled');
     } else {
-      return document.querySelector(el)
+      $('#header').removeClass('header-scrolled');
     }
-  }
-
-  /**
-   * Easy event listener function
-   */
-  const on = (type, el, listener, all = false) => {
-    let selectEl = select(el, all)
-    if (selectEl) {
-      if (all) {
-        selectEl.forEach(e => e.addEventListener(type, listener))
-      } else {
-        selectEl.addEventListener(type, listener)
-      }
-    }
-  }
-
-  /**
-   * Easy on scroll event listener 
-   */
-  const onscroll = (el, listener) => {
-    el.addEventListener('scroll', listener)
-  }
-
-  /**
-   * Navbar links active state on scroll
-   */
-  let navbarlinks = select('#navbar .scrollto', true)
-  const navbarlinksActive = () => {
-    let position = window.scrollY + 200
-    navbarlinks.forEach(navbarlink => {
-      if (!navbarlink.hash) return
-      let section = select(navbarlink.hash)
-      if (!section) return
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        navbarlink.classList.add('active')
-      } else {
-        navbarlink.classList.remove('active')
-      }
-    })
-  }
-  window.addEventListener('load', navbarlinksActive)
-  onscroll(document, navbarlinksActive)
-
-  /**
-   * Scrolls to an element with header offset
-   */
-  const scrollto = (el) => {
-    let elementPos = select(el).offsetTop
-    window.scrollTo({
-      top: elementPos,
-      behavior: 'smooth'
-    })
-  }
-
-  /**
-   * Back to top button
-   */
-  let backtotop = select('.back-to-top')
-  if (backtotop) {
-    const toggleBacktotop = () => {
-      if (window.scrollY > 100) {
-        backtotop.classList.add('active')
-      } else {
-        backtotop.classList.remove('active')
-      }
-    }
-    window.addEventListener('load', toggleBacktotop)
-    onscroll(document, toggleBacktotop)
-  }
-
-  /**
-   * Mobile nav toggle
-   */
-  on('click', '.mobile-nav-toggle', function(e) {
-    select('body').classList.toggle('mobile-nav-active')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
   })
 
-  /**
-   * Scrool with ofset on links with a class name .scrollto
-   */
-  on('click', '.scrollto', function(e) {
-    if (select(this.hash)) {
-      e.preventDefault()
 
-      let body = select('body')
-      if (body.classList.contains('mobile-nav-active')) {
-        body.classList.remove('mobile-nav-active')
-        let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
-      }
-      scrollto(this.hash)
-    }
-  }, true)
+    $('.active-course-carusel').owlCarousel({
+        items:3,
+        loop:true,
+        margin:30,
+        dots: true,
+        nav:true,
+        navText: ["<span class='lnr lnr-arrow-up'></span>",
+        "<span class='lnr lnr-arrow-down'></span>"],        
+            responsive: {
+            0: {
+                items: 1
+            },
+            480: {
+                items: 1,
+            },
+            768: {
+                items: 2,
+            },
+            900: {
+                items: 3,
+            }
 
-  /**
-   * Scroll with ofset on page load with hash links in the url
-   */
-  window.addEventListener('load', () => {
-    if (window.location.hash) {
-      if (select(window.location.hash)) {
-        scrollto(window.location.hash)
-      }
-    }
-  });
-
-  /**
-   * Preloader
-   */
-  let preloader = select('#preloader');
-  if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove()
+        }
     });
-  }
 
-  /**
-   * Hero type effect
-   */
-  const typed = select('.typed')
-  if (typed) {
-    let typed_strings = typed.getAttribute('data-typed-items')
-    typed_strings = typed_strings.split(',')
-    new Typed('.typed', {
-      strings: typed_strings,
-      loop: true,
-      typeSpeed: 100,
-      backSpeed: 50,
-      backDelay: 2000
+        $('.active-tstimonial-carusel').owlCarousel({
+        items:3,
+        margin:30,
+        autoplay:true,
+        loop:true,
+        dots: true,       
+            responsive: {
+            0: {
+                items: 1
+            },
+            480: {
+                items: 1,
+            },
+            768: {
+                items: 2,
+            },
+            900: {
+                items: 3,
+            }
+
+        }
     });
-  }
 
-  /**
-   * Skills animation
-   */
-  let skilsContent = select('.skills-content');
-  if (skilsContent) {
-    new Waypoint({
-      element: skilsContent,
-      offset: '80%',
-      handler: function(direction) {
-        let progress = select('.progress .progress-bar', true);
-        progress.forEach((el) => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%'
-        });
-      }
-    })
-  }
 
-  /**
-   * Porfolio isotope and filter
-   */
-  window.addEventListener('load', () => {
-    let portfolioContainer = select('.portfolio-container');
-    if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: '.portfolio-item'
-      });
 
-      let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
-        e.preventDefault();
-        portfolioFilters.forEach(function(el) {
-          el.classList.remove('filter-active');
-        });
-        this.classList.add('filter-active');
+    //  Start Google map 
 
-        portfolioIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        portfolioIsotope.on('arrangeComplete', function() {
-          AOS.refresh()
-        });
-      }, true);
+            // When the window has finished loading create our google map below
+
+            if(document.getElementById("map")){
+            
+            google.maps.event.addDomListener(window, 'load', init);
+        
+            function init() {
+                // Basic options for a simple Google Map
+                // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+                var mapOptions = {
+                    // How zoomed in you want the map to start at (always required)
+                    zoom: 11,
+
+                    // The latitude and longitude to center the map (always required)
+                    center: new google.maps.LatLng(40.6700, -73.9400), // New York
+
+                    // How you would like to style the map. 
+                    // This is where you would paste any style found on Snazzy Maps.
+                    styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}]
+                };
+
+                // Get the HTML DOM element that will contain your map 
+                // We are using a div with id="map" seen below in the <body>
+                var mapElement = document.getElementById('map');
+
+                // Create the Google Map using our element and options defined above
+                var map = new google.maps.Map(mapElement, mapOptions);
+
+                // Let's also add a marker while we're at it
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(40.6700, -73.9400),
+                    map: map,
+                    title: 'Snazzy!'
+                });
+            }
     }
 
-  });
 
-  /**
-   * Initiate portfolio lightbox 
-   */
-  const portfolioLightbox = GLightbox({
-    selector: '.portfolio-lightbox'
-  });
+        $(document).ready(function() {
+            $('#mc_embed_signup').find('form').ajaxChimp();
+        });      
 
-  /**
-   * Initiate portfolio details lightbox 
-   */
-  const portfolioDetailsLightbox = GLightbox({
-    selector: '.portfolio-details-lightbox',
-    width: '90%',
-    height: '90vh'
-  });
 
-  /**
-   * Portfolio details slider
-   */
-  new Swiper('.portfolio-details-slider', {
-    speed: 400,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
 
-  /**
-   * Testimonials slider
-   */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
 
-  /**
-   * Animation on scroll
-   */
-  window.addEventListener('load', () => {
-    AOS.init({
-      duration: 1000,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    })
-  });
 
-  /**
-   * Initiate Pure Counter 
-   */
-  new PureCounter();
 
-})()
+
+
+ });
