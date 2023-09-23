@@ -36,7 +36,7 @@ public class BookGenreManager : IBookGenreManager
         if(check is null)
         {
             _logger.LogWarning("Invalid data");
-            throw new BaseInvalidDataException(nameof(check));
+            throw new ValidationException(nameof(check));
         }
 
         var entity = await _repository

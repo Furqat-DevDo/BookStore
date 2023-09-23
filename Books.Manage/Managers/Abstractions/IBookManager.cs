@@ -7,6 +7,7 @@ public record BookModel
     public int WriterId { get; set; }
     public List<GenreModel>? Genres { get; set; }
     public required string FilePath { get; set; }
+    public string? CoverImageSrc { get; set; }
     public string? Description { get; set; }
     public DateTime CreatedDateTime { get; set; }
     public DateTime? UpdatedDate { get; set; }
@@ -17,6 +18,7 @@ public record CreateBookModel(
     int WriterId,
     List<GenreModel>? Genres,
     string FilePath,
+    string CoverImageSrc,
     string? Description);
 
 public interface IBookManager

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Books.Manage.Managers.Abstractions;
+﻿namespace Books.Manage.Managers.Abstractions;
 
 public class WriterModel
 {
@@ -16,7 +10,7 @@ public class WriterModel
     public DateTime? UpdatedDate { get; set; }
 }
 
-public record CreateWriterModel(int Id,
+public record CreateWriterModel(
     string FullName,
     List<BookModel>? Books,
     List<BookSeriesModel>? BookSeries);
@@ -27,6 +21,6 @@ public interface IWriterManager
     Task<WriterModel> UpdateWriterAsync(int id, CreateWriterModel model);
     Task<bool> DeleteWriterAsync(int id);
     Task<WriterModel> GetWriterByIdAsync(int id);
-    Task<WriterModel> GetWriterByFullNameAsync(string name);
+    Task<WriterModel> GetWriterByNameAsync(string name);
     Task<IEnumerable<WriterModel>> GetWritersAsync();
 }

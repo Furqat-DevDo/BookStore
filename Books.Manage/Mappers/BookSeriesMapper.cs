@@ -4,7 +4,8 @@ using Books.Manage.Mappers.Abstractions;
 
 namespace Books.Manage.Mappers;
 
-public class BookSeriesMapper : IBookSeriesMapper
+public class BookSeriesMapper : 
+    IGenericMapper<CreateBookSeriesModel,BookSeries,BookSeriesModel>
 {
     public BookSeries ToEntity(CreateBookSeriesModel model)
     {
@@ -12,7 +13,7 @@ public class BookSeriesMapper : IBookSeriesMapper
         {
             Name = model.Name,
             WriterId = model.WriterId,
-            BookId = model.BookId
+            BookIds = model.BookIds
         };
         return bookSeries;
     }
@@ -24,7 +25,7 @@ public class BookSeriesMapper : IBookSeriesMapper
             Id = entity.Id,
             Name = entity.Name,
             WriterId = entity.WriterId,
-            BookId = entity.BookId,
+            BookIds = entity.BookIds,
             CreatedDateTime = entity.CreatedDate,
             UpdatedDate = entity.UpdatedDate,
         };
@@ -35,7 +36,7 @@ public class BookSeriesMapper : IBookSeriesMapper
     {
         entity.Name = seriesModel.Name;
         entity.WriterId = seriesModel.WriterId;
-        entity.BookId = seriesModel.BookId;
+        entity.BookIds = seriesModel.BookIds;
 
         return entity;
     }

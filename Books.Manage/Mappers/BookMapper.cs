@@ -4,26 +4,19 @@ using Books.Manage.Mappers.Abstractions;
 
 namespace Books.Manage.Mappers;
 
-public class BookMapper  : IBookMapper
+public class BookMapper  : IGenericMapper<CreateBookModel,Book,BookModel>
 {
     public Book ToEntity(CreateBookModel model)
     {
-       var book =  new Book
+        var book =  new Book
         {
           Name = model.Name,
           WriterId = model.WriterId,
-          FilePath = model.FilePath,
+          BodyFileSrc = model.FilePath,
+          CoverImageSrc = model.CoverImageSrc,
           Description = model.Description,
         };
 
-       if (model.Genres is not null && model.Genres.Any())
-       {
-           book.Genres = model.Genres.Select(g => new Genre
-           {
-             Id = g.Id,
-             Name = g.Name,
-           }).ToList();
-       }
        return book;
     }
 
@@ -33,22 +26,13 @@ public class BookMapper  : IBookMapper
         {
             Id = entity.Id,
             Name = entity.Name,
-            FilePath = entity.FilePath,
+            FilePath = entity.BodyFileSrc,
             WriterId = entity.WriterId,
             Description = entity.Description,
             CreatedDateTime = entity.CreatedDate,
-            UpdatedDate = entity.UpdatedDate
-
+            UpdatedDate = entity.UpdatedDate,
+            CoverImageSrc = entity.CoverImageSrc
         };
-
-        if (entity.Genres is not null && entity.Genres.Any())
-        {
-            model.Genres = entity.Genres
-                .Select(g => new GenreModel(
-                    g.Id,
-                    g.Name))
-                .ToList();
-        }
 
         return model;
 
@@ -57,13 +41,9 @@ public class BookMapper  : IBookMapper
     public Book Update(Book book, CreateBookModel model)
     {
         book.Description = model.Description;
-        book.FilePath = model.FilePath;
+        book.BodyFileSrc = model.FilePath;
+        book.CoverImageSrc = model.CoverImageSrc;
         book.WriterId = model.WriterId;
-
-        if (model.Genres is not null && model.Genres.Any())
-        {
-             //TODO IGenre Mapperdan Update Methodini ishlatish.
-        }
 
         return book;
     }

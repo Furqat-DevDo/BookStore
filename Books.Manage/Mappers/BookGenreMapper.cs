@@ -4,9 +4,9 @@ using Books.Manage.Mappers.Abstractions;
 
 namespace Books.Manage.Mappers;
 
-public class BookGenreMapper : IBookGenreMapper
+public class BookGenreMapper : IGenericMapper<CreateBookGenreModel,BookGenre,BookGenreModel>
 {
-    public BookGenre ToEntity(CreateBookGenreModel model)
+    public BookGenre ToEntity (CreateBookGenreModel model)
     {
         var bookGenre = new BookGenre
         {
@@ -20,7 +20,6 @@ public class BookGenreMapper : IBookGenreMapper
     {
         var bookGenre = new BookGenreModel
         {
-            Id = model.Id,
             GenreId = model.GenreId,
             BookId = model.BookId,
             CreatedDate = model.CreatedDate,

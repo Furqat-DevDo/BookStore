@@ -42,7 +42,7 @@ public class BookFileRepository : IBookFileRepository
         var book = await _dbConetxt.Books.FirstOrDefaultAsync(b => b.Id == id);
         if (book is null)
         {
-            throw new BookNotFoundException();
+            throw new NotFoundException();
         }
 
         var bookFile = await _dbConetxt.BookFiles.FirstOrDefaultAsync(f => f.BookId == book.Id);

@@ -1,15 +1,10 @@
 ﻿using Books.Core.Entities;
 using Books.Manage.Managers.Abstractions;
 using Books.Manage.Mappers.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Books.Manage.Mappers;
 
-public class WriterMapper : IWriterMapper
+public class WriterMapper : IGenericMapper<CreateWriterModel,Writer,WriterModel>
 {
     public Writer ToEntity(CreateWriterModel model)
     {
@@ -32,11 +27,7 @@ public class WriterMapper : IWriterMapper
         return model;
     }
 
+    [Obsolete("Method does not implemented.",true)]
     public Writer Update(Writer book, CreateWriterModel model)
-    {
-        book.Id = model.Id;
-        book.FullName = model.FullName;
-
-        return book;
-    }
+        => throw new NotImplementedException();
 }
