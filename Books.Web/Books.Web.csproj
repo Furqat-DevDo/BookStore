@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Books.Core\Books.Core.csproj" />
+    <ProjectReference Include="..\Books.Manage\Books.Manage.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,12 +26,6 @@
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="wwwroot\elements.html" />
     <None Include="wwwroot\generic.html" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="forms\contact.php">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>

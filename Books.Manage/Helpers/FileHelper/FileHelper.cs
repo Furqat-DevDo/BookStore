@@ -1,51 +1,61 @@
 ﻿
+using Books.Manage.Helpers.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace Books.Manage.Helpers.FileHelper;
 
-public static class FileHelper
+public class FileHelper
 {
-    private static string destination = "./Files";
-    private static ILoggerFactory _loggerFactory = new LoggerFactory();
+    private readonly ILogger<FileHelper> _logger;
 
-    public static async Task<(string, string, Guid)> SaveFileAsync(IFormFile formFile)
+    public FileHelper(ILogger<FileHelper> logger)
     {
-        if (formFile is null)
-        {
-            var logger = _loggerFactory.CreateLogger("File");
-            logger.LogError("Form file is null.");
-            throw new ArgumentNullException(nameof(formFile)); ;
+        _logger = logger;
+    }
 
-        }
-
+    /// <summary>
+    /// Will save file specified destination.
+    /// </summary>
+    /// <param name="formFile"></param>
+    /// <param name="destination"></param>
+    /// <returns></returns>
+    public  async Task<(string, string, Guid)> SaveFileAsync(IFormFile formFile,string destination)
+    {
+        
         if (!Directory.Exists(destination))
         {
             Directory.CreateDirectory(destination);
         }
 
         var fileId = Guid.NewGuid();
-        string fileExtension = Path.GetExtension(formFile.FileName);
+        var fileExtension = Path.GetExtension(formFile.FileName);
 
-        string fileName = fileId.ToString("N") + fileExtension;
+        var fileName = fileId.ToString("N") + fileExtension;
 
-        string destinationFilePath = Path.Combine(destination, fileName);
+        var destinationFilePath = Path.Combine(destination, fileName);
 
-        using FileStream destinationStream = File.Create(destinationFilePath);
+        await using var destinationStream = File.Create(destinationFilePath);
         await formFile.CopyToAsync(destinationStream);
 
         return (destinationFilePath, fileExtension, fileId);
     }
 
-    public static async Task<byte[]> ReadFileAsync(string filePath)
+
+    /// <summary>
+    /// Read File from source or throw an exception.
+    /// </summary>
+    /// <param name="filePath"></param>
+    /// <exception cref="ValidationException"></exception>
+    public async Task<byte[]> ReadFileAsync(string filePath)
     {
-        if (filePath == null || !File.Exists(filePath))
+        if (!File.Exists(filePath))
         {
-            var logger = _loggerFactory.CreateLogger("FileOperations");
-            logger.LogError("File path is invalid or does not exist.");
-            throw new ArgumentException("Invalid file path.", nameof(filePath));
+            _logger.LogError("File path is invalid or does not exist.");
+            throw new ValidationException("Invalid file path.",nameof(filePath));
         }
-        byte[] byteArray = new byte[0];
+
+        byte[] byteArray;
 
         try
         {
@@ -53,9 +63,8 @@ public static class FileHelper
         }
         catch (Exception ex)
         {
-            var logger = _loggerFactory.CreateLogger("FileOperations");
-            logger.LogError(ex, "An error occurred while reading the file.");
-            throw new ArgumentException("Invalid file path.", nameof(filePath));
+            _logger.LogError(ex, "An error occurred while reading the file.");
+            throw new ValidationException("Invalid file path.", nameof(filePath));
         }
 
         return byteArray;

@@ -9,6 +9,6 @@ public class BookSeriesConfiguration : IEntityTypeConfiguration<BookSeries>
     public void Configure(EntityTypeBuilder<BookSeries> builder)
     {
         builder.HasIndex(b => b.WriterId);
-        builder.HasIndex(b => b.BookId);
+        builder.HasIndex(b => b.BookIds);
     }
 }
