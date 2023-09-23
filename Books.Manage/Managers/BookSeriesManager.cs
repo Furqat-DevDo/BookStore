@@ -63,6 +63,14 @@ public class BookSeriesManager : IBookSeriesManager
         return await _seriesRepository.DeleteAsync(id);
     }
 
+    public async Task<IEnumerable<BookSeriesModel>> GetBooksAsync()
+    {
+        var books = await _seriesRepository.GetAllAsync();
+
+        return !books.Any() ? Enumerable.Empty<BookSeriesModel>()
+            : books.AsEnumerable().Select(_mapper.ToModel);
+    }
+
     public async Task<BookSeriesModel> GetBookSeriesByBookIdAsync(int id)
     {
         await _guardian.GuardAgainstZero(id);
