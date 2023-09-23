@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Books.Core.Entities;
+using Books.Manage.Managers.Abstractions;
 
-namespace Books.Manage.Mappers.Abstractions
+namespace Books.Manage.Mappers.Abstractions;
+
+public interface IGenreMapper
 {
-    internal interface IGenreMapper
-    {
-    }
+    Genre ToEntity(CreateGenreModel model);
+    GenreModel ToModel(Genre entity);
+    Genre Update(Genre genre, CreateGenreModel model);
 }

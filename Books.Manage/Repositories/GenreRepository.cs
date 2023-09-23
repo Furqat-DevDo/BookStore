@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Books.Core.Data;
+using Books.Core.Entities;
+using Books.Manage.Repositories.Abstarctions;
 
-namespace Books.Manage.Repositories
+namespace Books.Manage.Repositories;
+
+public class GenreRepository : GenericRepository<Genre, BookDbContext>, IGenreRepository
 {
-    internal class GenreRepository
+    public GenreRepository(BookDbContext tContext) : base(tContext)
     {
     }
 }

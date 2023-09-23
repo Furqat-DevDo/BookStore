@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Books.Core.Data;
+using Books.Core.Entities;
 
-namespace Books.Manage.Repositories.Abstarctions
+namespace Books.Manage.Repositories.Abstarctions;
+
+public interface IGenreRepository : IGenericRepository<Genre, BookDbContext>
 {
-    internal interface IGenreRepository
-    {
-    }
 }

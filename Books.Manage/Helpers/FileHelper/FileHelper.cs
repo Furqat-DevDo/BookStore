@@ -26,7 +26,9 @@ public static class FileHelper
 
         var fileId = Guid.NewGuid();
         string fileExtension = Path.GetExtension(formFile.FileName);
+
         string fileName = fileId.ToString("N") + fileExtension;
+
         string destinationFilePath = Path.Combine(destination, fileName);
 
         using FileStream destinationStream = File.Create(destinationFilePath);
