@@ -27,7 +27,10 @@ public class WriterMapper : IGenericMapper<CreateWriterModel,Writer,WriterModel>
         return model;
     }
 
-    [Obsolete("Method does not implemented.",true)]
     public Writer Update(Writer writer, CreateWriterModel model)
-        => throw new NotImplementedException();
+    {
+        writer.FullName = model.FullName;
+
+        return writer;
+    }
 }

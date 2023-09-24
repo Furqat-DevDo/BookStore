@@ -1,25 +1,22 @@
-﻿using Books.Manage.Helpers.Exceptions;
+﻿using Books.Core.Entities;
+using Books.Manage.Helpers.Exceptions;
 using Books.Manage.Helpers.Validators;
 using Books.Manage.Managers.Abstractions;
-using Books.Manage.Mappers;
 using Books.Manage.Mappers.Abstractions;
-using Books.Manage.Repositories;
 using Books.Manage.Repositories.Abstarctions;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 namespace Books.Manage.Managers;
 
 public class GenreManager : IGenreManager
 {
     private readonly ILogger<GenreModel> _logger;
     private readonly IGuardian _guardian;
-    private readonly IGenreMapper _genreMapper;
+    private readonly IGenericMapper<CreateGenreModel,Genre,GenreModel> _genreMapper;
     private readonly IGenreRepository _genreRepository;
 
     public GenreManager(ILogger<GenreModel> logger,
         IGuardian guardian,
-        IGenreMapper genreMapper,
+        IGenericMapper<CreateGenreModel,Genre,GenreModel> genreMapper,
         IGenreRepository genreRepository)
     {
         _logger = logger;
@@ -39,35 +36,29 @@ public class GenreManager : IGenreManager
 
     public async Task<bool> DeleteGenreAsync(int id)
     {
-        await _guardian.GuardAgainstZero(id);
-        await _guardian.GuardAgainstMinus(id);
+        await _guardian.GuardAgainstZeroAndMinus(id);
 
         var check = await _genreRepository.GetAsync(g => g.Id == id);
 
-        if (check is null)
-        {
-            _logger.LogWarning("Genre Not found.");
-            throw new GenreNotFoundException(nameof(check));
-        }
+        if (check is not null) return await _genreRepository.DeleteAsync(id);
 
-        return await _genreRepository.DeleteAsync(id);
+        _logger.LogWarning("Genre Not found.");
+        throw new NotFoundException(nameof(check));
+
     }
 
     public async Task<GenreModel> GetGenreByIdAsync(int id)
     {
-        await _guardian.GuardAgainstZero(id);
-        await _guardian.GuardAgainstMinus(id);
+        await _guardian.GuardAgainstZeroAndMinus(id);
 
         var genre = await _genreRepository
             .GetAsync(s => s.Id == id);
 
-        if (genre is null)
-        {
-            _logger.LogWarning("BookSeries Not found.");
-            throw new GenreNotFoundException(nameof(genre));
-        }
+        if (genre is not null) return _genreMapper.ToModel(genre);
 
-        return _genreMapper.ToModel(genre);
+        _logger.LogWarning("BookSeries Not found.");
+        throw new NotFoundException(nameof(genre));
+
     }
 
     public async Task<GenreModel> GetGenreByNameAsync(string name)
@@ -75,43 +66,38 @@ public class GenreManager : IGenreManager
         await _guardian.GuardAgainstNullOrEmptyString(name);
 
         var genres = await _genreRepository
-            .GetAsync(s => s.Name == name);
+            .GetAsync(s => s.Name.Contains(name,StringComparison.CurrentCultureIgnoreCase));
 
-        if (genres is null)
-        {
-            _logger.LogWarning("Genre Not Found ");
-            throw new GenreNotFoundException(nameof(genres));
-        }
+        if (genres is not null) return _genreMapper.ToModel(genres);
 
-        return _genreMapper.ToModel(genres);
+        _logger.LogWarning("Genre Not Found ");
+        throw new NotFoundException(nameof(genres));
+
     }
 
     public async Task<IEnumerable<GenreModel>> GetGenresAsync()
     {
-        var books = await _genreRepository.GetAllAsync();
+        var genres = await _genreRepository.GetAllAsync();
 
-        return !books.Any() ? Enumerable.Empty<GenreModel>()
-            : books.AsEnumerable().Select(_genreMapper.ToModel);
+        return !genres.Any() ? Enumerable.Empty<GenreModel>()
+            : genres.AsEnumerable().Select(_genreMapper.ToModel);
     }
 
     public async Task<GenreModel> UpdateGenreAsync(int id, CreateGenreModel model)
     {
         await _guardian.GuardAgainstNull(model);
+        await _guardian.GuardAgainstZeroAndMinus(id);
 
-        var updateGenre = await _genreRepository.GetAsync(g => g.Id == id);
+        var genre = await _genreRepository.GetAsync(g => g.Id == id);
 
-        var check = _genreRepository.GetAsync(g =>
-        g.Id == id &&
-        g.Name == model.Name);
-
-        if (check is null || updateGenre is null)
+        if (genre is null)
         {
             _logger.LogWarning("Genre Not Found ");
-            throw new GenreNotFoundException(nameof(check));
+            throw new NotFoundException(nameof(Genre));
         }
 
         var entity = await _genreRepository.UpdateAsync(
-            _genreMapper.Update(updateGenre, model));
+            _genreMapper.Update(genre, model));
 
         return _genreMapper.ToModel(entity);
     }

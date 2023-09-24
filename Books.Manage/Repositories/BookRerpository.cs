@@ -22,4 +22,9 @@ public class BookRerpository : GenericRepository<Book,BookDbContext>, IBookRepos
 
         return await _bookFileRepository.DeleteBookFileAsync(id);
     }
+
+    public Task<bool> CheckAllAsync(List<int> modelBookIds)
+        => Task.FromResult(modelBookIds.All(id => _tContext.Books.Any(entity => entity.Id == id)));
+
+    
 }

@@ -5,7 +5,7 @@ using Books.Manage.Mappers.Abstractions;
 
 namespace Books.Manage.Mappers;
 
-public class BookFileMapper : IGenericMapper<CreateBookFile,BookFile,BookFileModel>
+public class BookFileMapper : IGenericMapper<FileCreateModel,BookFile,BookFileModel>
 {
     private readonly IFileManager _fileManager;
 
@@ -15,7 +15,7 @@ public class BookFileMapper : IGenericMapper<CreateBookFile,BookFile,BookFileMod
     }
 
     [Obsolete("Method deso not implemented.",true)]
-    public BookFile ToEntity(CreateBookFile model)
+    public BookFile ToEntity(FileCreateModel model)
         => throw new NotImplementedException();
     
 
@@ -35,7 +35,7 @@ public class BookFileMapper : IGenericMapper<CreateBookFile,BookFile,BookFileMod
     }
 
     [Obsolete("Method deso not implemented.",true)]
-    public BookFile Update(BookFile entity, CreateBookFile model)
+    public BookFile Update(BookFile entity, FileCreateModel model)
        => throw new NotImplementedException();
     
 }

@@ -4,7 +4,7 @@ namespace Books.Manage.Managers.Abstractions;
 
 public interface IBookFileManager
 {
-    Task<BookFileModel> CreateBookFileAsync(CreateBookFile bookFile);
+    Task<BookFileModel> CreateBookFileAsync(FileCreateModel model);
     Task<bool> DeleteBookFileAsync(int id);
     Task<BookFileModel> GetBookFileInfoAsync(int id);
     Task<(byte[] bytes, string[] fileInfo)> DownloadBookFileAsync(int id);
@@ -20,4 +20,4 @@ public record BookFileModel
     public DateTime CreatedDate { get; init; }
 }
 
-public record CreateBookFile(int BookId, IFormFile File);
+public record FileCreateModel(int BookId, IFormFile File);

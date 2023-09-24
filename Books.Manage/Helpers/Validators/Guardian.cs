@@ -1,5 +1,4 @@
-﻿using Books.Manage.Repositories.Abstarctions;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace Books.Manage.Helpers.Validators;
 
@@ -13,18 +12,10 @@ public class Guardian : IGuardian
         return Task.CompletedTask;
     }
 
-    public Task GuardAgainstZero<T> (T input) where T: IConvertible,IEquatable<T>
+    public Task GuardAgainstZeroAndMinus<T> (T input) where T: IConvertible,IEquatable<T>
     {
-        if(Convert.ToDouble(input) == 0)
+        if(Convert.ToDouble(input) == 0 || Convert.ToDouble(input) < 0)
             throw new ArgumentException(nameof(input));
-
-        return Task.CompletedTask;
-    }
-
-    public Task GuardAgainstMinus<T>(T input) where T: IConvertible,IEquatable<T>
-    {
-        if (Convert.ToDouble(input) < 0)
-            throw new ArgumentOutOfRangeException(nameof(input));
 
         return Task.CompletedTask;
     }
