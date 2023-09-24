@@ -28,6 +28,6 @@ public class WriterMapper : IGenericMapper<CreateWriterModel,Writer,WriterModel>
     }
 
     [Obsolete("Method does not implemented.",true)]
-    public Writer Update(Writer book, CreateWriterModel model)
+    public Writer Update(Writer writer, CreateWriterModel model)
         => throw new NotImplementedException();
 }

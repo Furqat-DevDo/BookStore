@@ -1,9 +1,7 @@
 ﻿using Books.Core.Data;
 using Books.Core.Entities;
-using Books.Manage.Helpers.Exceptions;
 using Books.Manage.Repositories.Abstarctions;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace Books.Manage.Repositories;
 
@@ -16,13 +14,12 @@ public class BookRerpository : GenericRepository<Book,BookDbContext>, IBookRepos
         _bookFileRepository = repository;
     }
 
-    public override async Task<bool> DeleteAsync(long Id)
+    public override async Task<bool> DeleteAsync(long id)
     {
-        if(! (await base.DeleteAsync(Id)))
-        {
-            throw new BookNotFoundException();
-        }
+        var book = await _tContext.Books.FirstOrDefaultAsync(b=> b.Id == id);
+        if (book is null)  return false;
+        book.IsDeleted = true;
 
-        return await _bookFileRepository.DeleteBookFileAsync(Id);
+        return await _bookFileRepository.DeleteBookFileAsync(id);
     }
 }

@@ -1,11 +1,10 @@
-﻿using Books.Core.Entities;
-
+﻿using Books.Core.Data;
+using Books.Core.Entities;
 
 namespace Books.Manage.Repositories.Abstarctions;
 
-public interface IBookFileRepository
+public interface IBookFileRepository : IGenericRepository<BookFile,BookDbContext>
 {
-    Task<BookFile> GetBookFileAsync(long id);
-    Task<BookFile> CreateBookFileAsync(BookFile bookFile);
+    Task<BookFile?> GetBookFileAsync(long id);
     Task<bool> DeleteBookFileAsync(long id);
 }
