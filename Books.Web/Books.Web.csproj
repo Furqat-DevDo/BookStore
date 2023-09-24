@@ -24,6 +24,7 @@
   <ItemGroup>
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="wwwroot\4.webp" />
   </ItemGroup>
 
 </Project>
