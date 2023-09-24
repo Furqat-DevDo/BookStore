@@ -3,7 +3,11 @@ using Books.Web.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddCustomServices(builder.Configuration);
+builder.Services.AddMyDbContext(builder.Configuration)
+    .AddMappers()
+    .AddRepositories()
+    .AddManagers()
+    .AddHelpers(builder.Configuration);
 
 var app = builder.Build();
 

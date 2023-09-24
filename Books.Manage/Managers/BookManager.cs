@@ -14,12 +14,12 @@ public class BookManager : IBookManager
     private readonly ILogger<BookManager> _logger;
     private readonly IGuardian _guardian;
     private readonly IGenericMapper<CreateBookModel,Book,BookModel> _mapper;
-    private readonly IGenericRepository<Book, BookDbContext> _repository;
+    private readonly IBookRepository _repository;
 
     public BookManager(ILogger<BookManager> logger,
         IGuardian guardian,
         IGenericMapper<CreateBookModel,Book,BookModel> mapper,
-        IGenericRepository<Book, BookDbContext> repository)
+        IBookRepository repository)
     {
         _logger = logger;
         _guardian = guardian;

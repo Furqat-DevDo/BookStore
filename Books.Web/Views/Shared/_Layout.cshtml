@@ -2,66 +2,23 @@
 <html lang="zxx" class="no-js">
 
 <head>
-    <meta charset="utf-8">
-    <!-- Mobile Specific Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="">
-    <!-- Author Meta -->
-    <meta name="author" content="codepixer">
-    <!-- Meta Description -->
-    <meta name="description" content="">
-    <!-- Meta Keyword -->
-    <meta name="keywords" content="">
-    <!-- meta character set -->
-    <meta charset="UTF-8">
-    <!-- Site Title -->
-    <title>Book</title>
+	<meta charset="utf-8">
+	<title>Book</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-    
-    <link rel="stylesheet" href=@Url.Content("css/linearicons.css") rel="stylesheet" asp-append-version="true">
-    <link rel="stylesheet" href=@Url.Content("css/font-awesome.min.css") rel="stylesheet" asp-append-version="true">
-    <link rel="stylesheet" href=@Url.Content("css/bootstrap.css") rel="stylesheet" asp-append-version="true">
-    <link rel="stylesheet" href=@Url.Content("css/magnific-popup.css") rel="stylesheet" asp-append-version="true">
-    <link rel="stylesheet" href=@Url.Content("css/nice-select.css") rel="stylesheet" asp-append-version="true">
-    <link rel="stylesheet" href=@Url.Content("css/animate.min.css") rel="stylesheet" asp-append-version="true">
-    <link rel="stylesheet" href=@Url.Content("css/owl.carousel.css") rel="stylesheet" asp-append-version="true">
-    <link rel="stylesheet" href=@Url.Content("css/main.css") rel="stylesheet" asp-append-version="true">
+	<link rel="stylesheet" href=@Url.Content("~/css/main.css") rel="stylesheet" asp-append-version="true">
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
 <header id="header" id="home">
-    <div class="container">
-        <div class="row align-items-center justify-content-between d-flex">
-            <div id="logo">
-                <a href="@Url.Action("Home", "Book")"><img src="img/logo.png" alt="" title="" /></a>
-            </div>
-            <nav id="nav-menu-container">
-                <ul class="nav-menu">
-                    <li class="menu-active"><a href="@Url.Action("Home", "Book")">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#fact">Fact</a></li>
-                    <li><a href="#price">Price</a></li>
-                    <li><a href="#course">Course</a></li>
-                    <li class="menu-has-children"><a href="">Pages</a>
-                        <ul>
-                            <li><a href="generic.html">Generic</a></li>
-                            <li><a href="elements.html">Elements</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav><!-- #nav-menu-container -->		    		
-        </div>
-    </div>
-</header><!-- #header -->
+	
+</header>
 
 <div class="container">
 
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
+	<main role="main" class="pb-3">
+		@RenderBody()
+	</main>
 
 </div>
 
@@ -70,70 +27,13 @@
 <div id="preloader"></div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-<script src=@Url.Content("js/vendor/jquery-2.2.4.min.js") asp-append-version="true"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src=@Url.Content("js/vendor/bootstrap.min.js") asp-append-version="true"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-<script src=@Url.Content("js/easing.min.js") asp-append-version="true"></script>			
-<script src=@Url.Content("js/hoverIntent.js") asp-append-version="true"></script>
-<script src=@Url.Content("js/superfish.min.js") asp-append-version="true"></script>
-<script src=@Url.Content("js/jquery.ajaxchimp.min.js") asp-append-version="true"></script>
-<script src=@Url.Content("js/jquery.magnific-popup.min.js") asp-append-version="true"></script>
-<script src="@Url.Content("~/js/owl.carousel.min.js")" asp-append-version="true"></script>
-<script src="@Url.Content("~/js/jquery.sticky.js")" asp-append-version="true"></script>
-<script src="@Url.Content("~/js/jquery.nice-select.min.js")" asp-append-version="true"></script>
-<script src="@Url.Content("~/js/parallax.min.js")" asp-append-version="true"></script>
-<script src="@Url.Content("~/js/waypoints.min.js")" asp-append-version="true"></script>
-<script src="@Url.Content("~/js/jquery.counterup.min.js")" asp-append-version="true"></script>
-<script src="@Url.Content("~/js/mail-script.js")" asp-append-version="true"></script>
-<script src="@Url.Content("~/js/main.js")" asp-append-version="true"></script>
+	<script src=@Url.Content("~/js/vendor/jquery-2.2.4.min.js") asp-append-version="true"></script>
 
 
-<!-- start footer Area -->		
-	<footer class="footer-area section-gap">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-5 col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>About Us</h6>
-						<p class="footer-text">
-                            IlmHub Book Store
-						</p>								
-					</div>
-				</div>
-				<div class="col-lg-5  col-md-6 col-sm-6">
-					<div class="single-footer-widget">
-						<h6>Newsletter</h6>
-						<p>Stay update with our latest</p>
-						<div class="" id="mc_embed_signup">
-							<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
-								<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
-			                        <button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
-			                        <div style="position: absolute; left: -5000px;">
-										<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-									</div>
-
-								<div class="info"></div>
-							</form>
-						</div>
-					</div>
-				</div>						
-				<div class="col-lg-2 col-md-6 col-sm-6 social-widget">
-					<div class="single-footer-widget">
-						<h6>Follow Us</h6>
-						<p>Let us be social</p>
-						<div class="footer-social d-flex align-items-center">
-							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-							<a href="#"><i class="fa fa-dribbble"></i></a>
-							<a href="#"><i class="fa fa-behance"></i></a>
-						</div>
-					</div>
-				</div>							
-			</div>
-		</div>
+	<footer class="footer">
+		
 	</footer>	
-	<!-- End footer Area -->
+
 
 </body>
 </html>

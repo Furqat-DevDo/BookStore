@@ -16,14 +16,14 @@ public class BookFileManager : IBookFileManager
     private readonly IFileManager _fileManager;
     private readonly IBookFileRepository _repository;
     private readonly IOptions<DirectoryOptions> _options;
-    private readonly IGenericMapper<FileCreateModel,BookFile,BookFileModel> _mapper;
+    private readonly IGenericMapper<CreateBookFileModel,BookFile,BookFileModel> _mapper;
 
     public BookFileManager(
         IGuardian guardian,
         IBookFileRepository repository, 
         IFileManager fileManager, 
         IOptions<DirectoryOptions> options, 
-        IGenericMapper<FileCreateModel,BookFile,BookFileModel> mapper)
+        IGenericMapper<CreateBookFileModel,BookFile,BookFileModel> mapper)
     {
         _guardian = guardian;
         _repository = repository;
@@ -32,7 +32,7 @@ public class BookFileManager : IBookFileManager
         _mapper = mapper;
     }
 
-    public async Task<BookFileModel> CreateBookFileAsync(FileCreateModel model)
+    public async Task<BookFileModel> CreateBookFileAsync(CreateBookFileModel model)
     {
         var pathes = _options.Value;
 
@@ -91,7 +91,7 @@ public class BookFileManager : IBookFileManager
         return (bytes, fileInfo);
     }
 
-    public async Task<BookFile> ToEntityAsync(FileCreateModel model,string path)
+    public async Task<BookFile> ToEntityAsync(CreateBookFileModel model,string path)
     {
         var (filePath, fileExt, fileId) = await _fileManager.SaveFileAsync(model.File,path);
         return new BookFile
