@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Books.Web.Controllers;
+namespace Books.Admin.Controllers;
 
 public class AdminController : Controller
 {
+    [HttpGet]
     public IActionResult Dashboard()
     {
-        return View("dashboard");
+        return View();
     }
 }
