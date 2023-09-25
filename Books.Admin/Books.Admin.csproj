@@ -7,6 +7,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Admin\billing.cshtml" />
+    <Content Remove="Views\Admin\dashboard.cshtml" />
+    <Content Remove="Views\Admin\icons.cshtml" />
+    <Content Remove="Views\Admin\map.cshtml" />
+    <Content Remove="Views\Admin\notifications.cshtml" />
+    <Content Remove="Views\Admin\profile.cshtml" />
+    <Content Remove="Views\Admin\rtl.cshtml" />
+    <Content Remove="Views\Admin\sign-in.cshtml" />
+    <Content Remove="Views\Admin\sign-up.cshtml" />
+    <Content Remove="Views\Admin\tables.cshtml" />
+    <Content Remove="Views\Admin\template.cshtml" />
+    <Content Remove="Views\Admin\typography.cshtml" />
+    <Content Remove="Views\Admin\virtual-reality.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Admin\billing.cshtml" />
+    <None Include="Views\Admin\dashboard.cshtml" />
+    <None Include="Views\Admin\icons.cshtml" />
+    <None Include="Views\Admin\map.cshtml" />
+    <None Include="Views\Admin\notifications.cshtml" />
+    <None Include="Views\Admin\profile.cshtml" />
+    <None Include="Views\Admin\rtl.cshtml" />
+    <None Include="Views\Admin\sign-in.cshtml" />
+    <None Include="Views\Admin\sign-up.cshtml" />
+    <None Include="Views\Admin\tables.cshtml" />
+    <None Include="Views\Admin\template.cshtml" />
+    <None Include="Views\Admin\typography.cshtml" />
+    <None Include="Views\Admin\virtual-reality.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11">
       <PrivateAssets>all</PrivateAssets>
