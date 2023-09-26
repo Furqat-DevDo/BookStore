@@ -1,122 +1,130 @@
-﻿@model SearchModel
+﻿@using Microsoft.AspNetCore.Localization
+@model SearchModel
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> localOptions
+
+@{
+    var culture = Context.Features.Get<IRequestCultureFeature>();
+
+    var cultures = localOptions.Value.SupportedUICultures!.Select(
+        c => new SelectListItem{Value = c.Name ,Text = Localizer.GetString(c.Name)}).ToList();
+
+    var returnUrl = string.IsNullOrWhiteSpace(Context.Request.Path) ?
+        "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
+
+
+        
+}
 <!DOCTYPE html>
 <html lang="eng">
 
-    <head>
-	    <meta charset="utf-8">
-        <!-- Font Awesome -->
-        <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-            rel="stylesheet"
-        />
-        <!-- Google Fonts -->
-        <link
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-            rel="stylesheet"
-        />
-        <!-- MDB -->
-        <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
-            rel="stylesheet"
-        />
+<head>
+    <meta charset="utf-8">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
+          rel="stylesheet" />
 
-    </head>
+</head>
 
-    <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
-        <header id="header" id="home">
-		        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		        <div class="container-fluid">
-			        <button
-				        class="navbar-toggler"
-				        type="button"
-				        data-mdb-toggle="collapse"
-				        data-mdb-target="#navbarTogglerDemo03"
-				        aria-controls="navbarTogglerDemo03"
-				        aria-expanded="false"
-				        aria-label="Toggle navigation"
-			        >
-				        <i class="fas fa-bars"></i>
-			        </button>
-				        <a class="navbar-brand" href="#"><i class="fas fa-house"></i></a>
-			        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-				        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active">Authors</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">Categories</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">Contact</a>
-                            </li>
-				        </ul>
-				        <form class="d-flex input-group w-auto">
-                        <input asp-action="Search" asp-controller="Book" method="post" asp-for="@Model.Filter"
-						        type="search"
-						        class="form-control"
-						        placeholder="Type query"
-						        aria-label="Search"
-					        />
-					        <button 
-						        class="btn btn-primary"
-						        type="button"
-                                        data-mdb-ripple-color="blue">
-                                    Search
-					        </button>
-				        </form>
-			        </div>
-		        </div>
-	        </nav>	
-        </header>
-
-        <div class="container">
-
-	        <main role="main" class="pb-3">
-		        @RenderBody()
-	        </main>
-
-        </div>
-
-        @await RenderSectionAsync("Scripts", required: false);
-
-        <div id="preloader"></div>
-        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-            <!-- MDB -->
-    <script
-        type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
-    ></script>
-            <!--Footer-->
-        <footer class="bg-dark text-center text-white" style="bottom: 0; position: fixed; width: 100%; text-align: center; background-color: ActiveBorder; height: 55px; display: flex; justify-content: center; align-items: center;">
-
-            <!-- Grid container -->
-            <div class="container p-4 pb-0">
-                <!-- Section: Social media -->
-                <section class="mb-4">
-                    <!-- Telegram -->
-                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-
-                    <!-- Instagram -->
-                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-
-                    <!-- Linkedin -->
-                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-
-                    <!-- Github -->
-                    <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </section>
-                <!-- Section: Social media -->
+    <header id="header" id="home">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler"
+                        type="button"
+                        data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarTogglerDemo03"
+                        aria-controls="navbarTogglerDemo03"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#"><i class="fas fa-house"></i></a>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active">@Localizer["Authors"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("Files", "File")">@Localizer["Categories"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">@Localizer["Contact"]</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex input-group w-auto" asp-action="Search" asp-controller="Book" method="post">
+                        <input asp-for="Filter" type="search" class="form-control" placeholder="Type query" aria-label="Search" />
+                        <span asp-validation-for="Filter" class="text-danger"></span>
+                        <button class="btn btn-primary"
+                                type="submit"
+                                data-mdb-ripple-color="blue">
+                            @Localizer["Search"]
+                        </button>
+                    </form>
+                    <div>
+                        <form asp-action="ChangeCulture" asp-controller ="Root" method="post"
+                              asp-route-returnUrl="@returnUrl">
+                            <select name="culture" asp-for="@culture!.RequestCulture.UICulture.Name"
+                                    asp-Items="@cultures" onchange="this.form.submit();"></select>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </footer>
+        </nav>
+    </header>
 
-    </body>
+    <div class="container">
+
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+
+    </div>
+
+    @await RenderSectionAsync("Scripts", required: false);
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- MDB -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
+    <!--Footer-->
+    <footer class="bg-dark text-center text-white" style="bottom: 0; position: fixed; width: 100%; text-align: center; background-color: ActiveBorder; height: 55px; display: flex; justify-content: center; align-items: center;">
+
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Telegram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-telegram"></i>
+                </a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-github"></i>
+                </a>
+            </section>
+            <!-- Section: Social media -->
+        </div>
+    </footer>
+
+</body>
 </html>

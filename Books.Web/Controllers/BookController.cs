@@ -38,18 +38,32 @@ public class BookController : Controller
         return View();
     }
 
+    public IActionResult Search()
+    {
+        return View();
+    }
+
     [HttpPost]
     public async Task<IActionResult> Search(SearchModel model)
     {
-        var result = new List<BookModel>();
 
-        var book = await _bookManager.GetBookByNameAsync(model.Filter);
-        result.Add(book);
+        if(ModelState.IsValid)
+        {
+            return RedirectToAction("Home", "Book");
+        }
+
+        return View(model);
+        
+
+        //var result = new List<BookModel>();
+
+        //var book = await _bookManager.GetBookByNameAsync(model.Filter);
+        //result.Add(book);
 
         
 
-        //TODO RedirectToAction(ListBook)
-        return View();
+        ////TODO RedirectToAction(ListBook)
+        //return View();
     }
 
 }

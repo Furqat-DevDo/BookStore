@@ -9,7 +9,9 @@ using Books.Manage.Mappers;
 using Books.Manage.Mappers.Abstractions;
 using Books.Manage.Repositories;
 using Books.Manage.Repositories.Abstarctions;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace Books.Web.Extensions;
 
@@ -64,6 +66,31 @@ public static class ServiceCollectionExtensions
             .AddScoped<IGuardian, Guardian>();
 
         services.Configure<DirectoryOptions>(configuration.GetSection("Directories"));
+
+        services.AddRouting(options =>
+        {
+            options.LowercaseUrls = true;
+        });
+
+        services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+        services.AddMvc()
+            .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+            .AddDataAnnotationsLocalization();
+
+        var supportedCultures = new[]
+        {
+            new CultureInfo("en-US"),
+            new CultureInfo("ru-RU"),
+            new CultureInfo("uz-Latn")
+        };
+
+        services.AddRequestLocalization(option =>
+        {
+           option.SupportedUICultures = supportedCultures;
+           option.SupportedCultures = supportedCultures;
+           option.SetDefaultCulture("uz-Latn");
+        });
 
         return services;
     }

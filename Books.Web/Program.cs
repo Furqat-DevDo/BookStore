@@ -3,6 +3,8 @@ using Books.Web.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+
 builder.Services.AddMyDbContext(builder.Configuration)
     .AddMappers()
     .AddRepositories()
@@ -19,6 +21,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseLocalization();
 
 app.UseRouting();
 
