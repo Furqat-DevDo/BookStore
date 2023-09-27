@@ -29,7 +29,13 @@
     <None Include="Resources\Models\SearchModel.ru.resx" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
-    <None Include="wwwroot\4.webp" />
+    <None Include="wwwroot\Images\4.webp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Views\Book\Books.uz.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

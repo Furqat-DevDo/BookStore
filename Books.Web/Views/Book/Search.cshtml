@@ -1,4 +1,14 @@
 ﻿@model SearchModel
+@inject IViewLocalizer Localizer
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<form class="d-flex input-group w-auto" asp-action="Search" asp-controller="Book" method="post">
+    <input asp-for="Filter" type="search" class="form-control" placeholder="Type query" aria-label="Search" />
+    <button class="btn btn-primary"
+            type="submit"
+            data-mdb-ripple-color="blue">
+        @Localizer["Search"]
+    </button>
+</form>

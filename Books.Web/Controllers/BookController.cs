@@ -1,5 +1,6 @@
 ﻿using Books.Manage.Managers.Abstractions;
 using Books.Web.Models;
+using Books.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Books.Web.Controllers;
@@ -33,6 +34,13 @@ public class BookController : Controller
         return View();
     }
 
+    [HttpPost]
+    public IActionResult Books(BookViewModel books)
+    {
+        return View(books);
+    }
+
+    [HttpGet]
     public IActionResult Books()
     {
         return View();
@@ -47,23 +55,18 @@ public class BookController : Controller
     public async Task<IActionResult> Search(SearchModel model)
     {
 
-        if(ModelState.IsValid)
+        if(!ModelState.IsValid)
         {
-            return RedirectToAction("Home", "Book");
+            return View(model);
         }
 
-        return View(model);
+        var result = new BookViewModel();
+
+        var book = await _bookManager.GetBookByNameAsync(model.Filter);
         
 
-        //var result = new List<BookModel>();
 
-        //var book = await _bookManager.GetBookByNameAsync(model.Filter);
-        //result.Add(book);
-
-        
-
-        ////TODO RedirectToAction(ListBook)
-        //return View();
+        return RedirectToAction("Books",routeValues:result);
     }
 
 }
