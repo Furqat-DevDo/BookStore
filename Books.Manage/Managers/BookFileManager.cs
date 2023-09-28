@@ -97,7 +97,7 @@ public class BookFileManager : IBookFileManager
         return new BookFile
         {
             Id = fileId,
-            BookId = model.BookId,
+            //BookId = model.BookId,
             Path = filePath,
             Size = model.File.Length,
             FileExtension = fileExt,

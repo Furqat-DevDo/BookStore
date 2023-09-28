@@ -20,4 +20,4 @@ public record BookFileModel
     public DateTime CreatedDate { get; init; }
 }
 
-public record CreateBookFileModel(int BookId, IFormFile File);
+public record CreateBookFileModel(IFormFile File);

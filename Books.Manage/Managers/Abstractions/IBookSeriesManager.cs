@@ -10,7 +10,8 @@ public record BookSeriesModel
     public DateTime? UpdatedDate { get; set; }
 }
 
-public record CreateBookSeriesModel(string Name,
+public record CreateBookSeriesModel(
+    string Name,
     List<int> BookIds,
     int WriterId);
 

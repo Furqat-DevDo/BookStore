@@ -1,5 +1,6 @@
 ﻿using Books.Manage.Managers.Abstractions;
 using Books.Web.Models;
+using Books.Web.ViewManagers;
 using Books.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,21 +8,11 @@ namespace Books.Web.Controllers;
 
 public class BookController : Controller
 {
-    private readonly IBookManager _bookManager;
-    private readonly IGenreManager _genreManager;
-    private readonly IWriterManager _writerManager;
-    private readonly IBookSeriesManager _bookSeriesManager;
+    private readonly IGenericViewManager<BookModel,CreateBookViewModel> _viewManager;
 
-    public BookController(
-        IBookManager bookManager, 
-        IGenreManager genreManager, 
-        IWriterManager writerManager, 
-        IBookSeriesManager bookSeriesManager)
+    public BookController(IGenericViewManager<BookModel, CreateBookViewModel> viewManager)
     {
-        _bookManager = bookManager;
-        _genreManager = genreManager;
-        _writerManager = writerManager;
-        _bookSeriesManager = bookSeriesManager;
+        _viewManager = viewManager;
     }
 
     public IActionResult Home()
@@ -29,9 +20,10 @@ public class BookController : Controller
         return View();
     }
 
-    public IActionResult About()
+    [HttpGet]
+    public IActionResult About(BookModel model)
     {
-        return View();
+        return View(model);
     }
 
     [HttpPost]
@@ -44,6 +36,22 @@ public class BookController : Controller
     public IActionResult Books()
     {
         return View();
+    }
+
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateAsync(CreateBookViewModel model)
+    {
+        if(! ModelState.IsValid)
+            return View(model);
+
+        var newBook = await _viewManager.CreateAsync(model);
+        return RedirectToAction("About", newBook);
     }
 
     public IActionResult Search()
@@ -61,10 +69,6 @@ public class BookController : Controller
         }
 
         var result = new BookViewModel();
-
-        var book = await _bookManager.GetBookByNameAsync(model.Filter);
-        
-
 
         return RedirectToAction("Books",routeValues:result);
     }

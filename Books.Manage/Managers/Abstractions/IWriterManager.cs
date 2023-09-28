@@ -23,4 +23,5 @@ public interface IWriterManager
     Task<WriterModel> GetWriterByIdAsync(int id);
     Task<WriterModel> GetWriterByNameAsync(string name);
     Task<IEnumerable<WriterModel>> GetWritersAsync();
+    Task<WriterModel> GetOrCreateWriterAsync(string writerName);
 }
