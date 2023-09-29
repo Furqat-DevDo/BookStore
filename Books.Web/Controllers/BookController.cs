@@ -15,6 +15,7 @@ public class BookController : Controller
         _viewManager = viewManager;
     }
 
+    [HttpGet]
     public IActionResult Home()
     {
         return View();
@@ -27,7 +28,7 @@ public class BookController : Controller
     }
 
     [HttpPost]
-    public IActionResult Books(BookViewModel books)
+    public IActionResult Books(BookModel books)
     {
         return View(books);
     }
@@ -45,15 +46,16 @@ public class BookController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateBookViewModel model)
+    public async Task<IActionResult> CreateAsync(CreateBookModel model)
     {
-        if(! ModelState.IsValid)
+        if(!ModelState.IsValid)
             return View(model);
 
         var newBook = await _viewManager.CreateAsync(model);
         return RedirectToAction("About", newBook);
     }
 
+    [HttpGet]
     public IActionResult Search()
     {
         return View();

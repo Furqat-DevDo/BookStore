@@ -9,7 +9,8 @@ builder.Services.AddMyDbContext(builder.Configuration)
     .AddMappers()
     .AddRepositories()
     .AddManagers()
-    .AddHelpers(builder.Configuration);
+    .AddHelpers(builder.Configuration)
+    .AddViewManagers();
 
 var app = builder.Build();
 

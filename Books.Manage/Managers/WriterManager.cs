@@ -80,6 +80,11 @@ public class WriterManager : IWriterManager
             : writers.AsEnumerable().Select(_writerMapper.ToModel);
     }
 
+    public Task<WriterModel> GetOrCreateWriterAsync(string writerName)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<WriterModel> UpdateWriterAsync(int id, CreateWriterModel model)
     {
         await _guardian.GuardAgainstNull(model);
