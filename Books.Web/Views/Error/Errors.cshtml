@@ -1,0 +1,17 @@
+﻿@model ErrorViewModel
+
+@{
+    
+    if (Model is not null)
+    {
+        <h3>
+            Error Details
+        </h3>
+        <p>Path :@Model.Path</p>
+
+        @foreach (var message in Model.Messages)
+        {
+            <p>ErrorMessages : @message</p>
+        }
+    }
+}

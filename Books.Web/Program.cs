@@ -1,4 +1,5 @@
 using Books.Web.Extensions;
+using Books.Web.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +10,7 @@ builder.Services.AddMyDbContext(builder.Configuration)
     .AddMappers()
     .AddRepositories()
     .AddManagers()
-    .AddHelpers(builder.Configuration)
-    .AddViewManagers();
+    .AddHelpers(builder.Configuration);
 
 var app = builder.Build();
 
@@ -22,7 +22,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 app.UseLocalization();
 
 app.UseRouting();

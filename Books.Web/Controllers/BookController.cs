@@ -1,18 +1,15 @@
 ﻿using Books.Manage.Managers.Abstractions;
 using Books.Web.Models;
-using Books.Web.ViewManagers;
-using Books.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Books.Web.Controllers;
 
 public class BookController : Controller
 {
-    private readonly IGenericViewManager<BookModel,CreateBookViewModel> _viewManager;
+  
 
-    public BookController(IGenericViewManager<BookModel, CreateBookViewModel> viewManager)
+    public BookController()
     {
-        _viewManager = viewManager;
     }
 
     [HttpGet]
@@ -51,8 +48,8 @@ public class BookController : Controller
         if(!ModelState.IsValid)
             return View(model);
 
-        var newBook = await _viewManager.CreateAsync(model);
-        return RedirectToAction("About", newBook);
+     
+        return RedirectToAction("About");
     }
 
     [HttpGet]
@@ -70,9 +67,8 @@ public class BookController : Controller
             return View(model);
         }
 
-        var result = new BookViewModel();
 
-        return RedirectToAction("Books",routeValues:result);
+        return RedirectToAction("Books");
     }
 
 }

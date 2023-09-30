@@ -12,8 +12,7 @@ using Books.Manage.Repositories.Abstarctions;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
-using Books.Web.ViewManagers;
-using Books.Web.ViewModels;
+using Books.Web.Middlewares;
 
 namespace Books.Web.Extensions;
 
@@ -94,12 +93,8 @@ public static class ServiceCollectionExtensions
            option.SetDefaultCulture("uz-Latn");
         });
 
-        return services;
-    }
+        services.AddScoped<ExceptionHandlerMiddleware>();
 
-    public static IServiceCollection AddViewManagers(this IServiceCollection services)
-    {
-        services.AddScoped<IGenericViewManager<BookModel,CreateBookViewModel>,BookViewManager>();
         return services;
     }
 }

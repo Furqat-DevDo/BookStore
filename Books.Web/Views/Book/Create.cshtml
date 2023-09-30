@@ -1,5 +1,4 @@
-﻿@model  CreateBookViewModel
-@inject IViewLocalizer Localizer
+﻿@inject IViewLocalizer Localizer
 @inject IGenreManager Manager
 
 @{
@@ -12,20 +11,20 @@
         <div class="row mb-4">
             <div class="col">
                 <div class="form-outline">
-                    <input type="text" asp-for="Name" class="form-control" />
+                    <input type="text"  class="form-control" />
                     <label class="form-label">@Localizer["Book name"]</label>
                 </div>
             </div>
             <div class="col">
                 <div class="form-outline">
-                    <input type="text" asp-for="WriterName" class="form-control" />
+                    <input type="text" class="form-control" />
                     <label class="form-label">@Localizer["Writer Name"]</label>
                 </div>
             </div>
 
 
             <div class="col-12">
-                <label class="visually-hidden" asp-for="GenreList">@Localizer["Genres"]</label>
+                <label class="visually-hidden">@Localizer["Genres"]</label>
                 <select class="select">
                     @foreach (var genre in genres)
                     {
@@ -37,18 +36,18 @@
             <div class="col">
                 <label class="form-label">@Localizer["Book cover image"]</label>
                 <div class="form-outline mb-4">
-                    <input type="file" asp-for="CoverImage" class="form-control" />
+                    <input type="file"  class="form-control" />
                 </div>
             </div>
 
             <div class="col">
                 <label class="form-label">@Localizer["Book file"]</label>
                 <div class="form-outline mb-4">
-                    <input type="file" asp-for="BookFile" class="form-control" />
+                    <input type="file"  class="form-control" />
                 </div>
             </div>
             <div class="form-outline mb-4 col-12">
-                <textarea class="form-control" asp-for="Description" rows="4"></textarea>
+                <textarea class="form-control" rows="4"></textarea>
                 <label class="form-label">@Localizer["Description"]</label>
             </div>
             <div class="col text-center"> <!-- Center the button within the form -->
