@@ -60,10 +60,9 @@ public class WriterManager : IWriterManager
 
     }
 
-    public async Task<WriterModel> GetWriterByNameAsync(string name,DateTime birthdate)
+    public async Task<WriterModel> GetWriterByNameAsync(string name,DateOnly birthdate)
     {
         await _guardian.GuardAgainstNullOrEmptyString(name);
-        await _guardian.GuardAgainstNullOrEmptyString(birthdate);
 
         var writer = await _writerRepository.GetAsync(b =>b.BirthDate==birthdate && b.FullName.Contains(name,
             StringComparison.CurrentCultureIgnoreCase));

@@ -6,25 +6,24 @@
 }
 
 <div class="form-container">
-    <form asp-action="Create" asp-controller="Book" method="post" class="custom-form">
+    <form asp-action="Create" asp-controller="Writer" method="post" class="custom-form">
         <div class="row mb-4">
             <div class="col">
                 <div class="form-outline">
                     <input type="text" asp-for="FullName" class="form-control" />
                     <label class="form-label">@Localizer["FullName"]</label>
+                    <span asp-validation-for="FullName"></span>
                 </div>
             </div>
             <div class="col">
-                <div class="form-outline">
-                    <input type="text" asp-for="Birthdate" class="form-control" />
-                    <label class="form-label">@Localizer["BirthDate"]</label>
+                <div class="form-group">
+                    <input type="datetime" asp-for="Birthdate" class="form-control">
+                    <span asp-validation-for="Birthdate"></span>
                 </div>
-               
             </div>   
         </div>
         <div class="form-control">
-            <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off" />
-            <label class="btn btn-primary" for="btn-check">Create button</label>
+            <button class="btn btn-primary" type="submit" >Create button</button>
         </div>
     </form>
 </div>

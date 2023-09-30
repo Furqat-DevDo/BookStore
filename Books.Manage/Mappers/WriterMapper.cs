@@ -1,4 +1,5 @@
-﻿using Books.Core.Entities;
+﻿using System.Globalization;
+using Books.Core.Entities;
 using Books.Manage.Managers.Abstractions;
 using Books.Manage.Mappers.Abstractions;
 
@@ -8,10 +9,12 @@ public class WriterMapper : IGenericMapper<CreateWriterModel,Writer,WriterModel>
 {
     public Writer ToEntity(CreateWriterModel model)
     {
+        var date = DateOnly.ParseExact(model.Birthdate,"MM/dd/yyyy",null);
+
         var writer = new Writer
         {
             FullName = model.FullName,
-            BirthDate=model.Birthdate,
+            BirthDate= date,
             
         };
         return writer;

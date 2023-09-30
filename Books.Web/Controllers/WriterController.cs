@@ -1,5 +1,4 @@
-﻿using Books.Manage.Managers;
-using Books.Manage.Managers.Abstractions;
+﻿using Books.Manage.Managers.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Books.Web.Controllers;
@@ -13,17 +12,22 @@ public class WriterController : Controller
         _writerManager = writerManager;
     }
 
-    public IActionResult Index()
+
+    public IActionResult About()
     {
         return View();
     }
+
+
     [HttpGet]
-    public async Task<IActionResult> CreateWriter()
+    public IActionResult Create()
     {
         return View();
     }
+
+
     [HttpPost]
-    public async Task<IActionResult> CreateWriter(CreateWriterModel model)
+    public async Task<IActionResult> Create(CreateWriterModel model)
     {
         if (!ModelState.IsValid)
             return View(model);
@@ -31,7 +35,5 @@ public class WriterController : Controller
         var newWriter = await _writerManager.CreateWriterAsync(model);
         return RedirectToAction("About", newWriter);
     }
-
-
 
 }

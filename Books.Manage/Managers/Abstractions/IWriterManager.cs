@@ -15,7 +15,7 @@ public record CreateWriterModel(
     string FullName,
     List<BookModel>? Books,
     List<BookSeriesModel>? BookSeries,
-    DateTime Birthdate);
+    string Birthdate);
 
 public interface IWriterManager
 {
@@ -23,7 +23,7 @@ public interface IWriterManager
     Task<WriterModel> UpdateWriterAsync(int id, CreateWriterModel model);
     Task<bool> DeleteWriterAsync(int id);
     Task<WriterModel> GetWriterByIdAsync(int id);
-    Task<WriterModel> GetWriterByNameAsync(string name,DateTime birthdate);
+    Task<WriterModel> GetWriterByNameAsync(string name,DateOnly birthdate);
     Task<IEnumerable<WriterModel>> GetWritersAsync();
     Task<WriterModel> GetOrCreateWriterAsync(string writerName);
 }
