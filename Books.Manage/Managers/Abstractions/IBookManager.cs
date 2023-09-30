@@ -41,6 +41,7 @@ public class ResultBooksModel
 {
     public List<string> Genres { get; set; } = new();
     public required string AuthorName { get; set; }
+    public string? FilePath { get; set; }
     public string? CoverImageSrc { get; set; }
     public required string Name { get; set; }
     public decimal Price { get; set; }
