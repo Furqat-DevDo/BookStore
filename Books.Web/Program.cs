@@ -16,7 +16,7 @@ var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("");
+    app.UseExceptionHandler("Error/Errors");
     app.UseHsts();
 }
 

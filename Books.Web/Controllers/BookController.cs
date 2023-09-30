@@ -6,10 +6,13 @@ namespace Books.Web.Controllers;
 
 public class BookController : Controller
 {
-  
+    private readonly IBookManager _bookManager;
+    private readonly IBookFileManager _bookFileManager;
 
-    public BookController()
+    public BookController(IBookManager bookManager, IBookFileManager bookFileManager)
     {
+        _bookManager = bookManager;
+        _bookFileManager = bookFileManager;
     }
 
     [HttpGet]
@@ -43,13 +46,14 @@ public class BookController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateBookModel model)
+    public async Task<IActionResult> Create(CreateBookViewModel model)
     {
         if(!ModelState.IsValid)
             return View(model);
 
-     
-        return RedirectToAction("About");
+        //var newBook = await _bookManager.CreateBookAsync(model);
+        //return RedirectToAction("About", newBook);
+        throw new Exception();
     }
 
     [HttpGet]
@@ -67,6 +71,7 @@ public class BookController : Controller
             return View(model);
         }
 
+        var result = "";
 
         return RedirectToAction("Books");*/
     }

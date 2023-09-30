@@ -1,4 +1,6 @@
-﻿namespace Books.Manage.Managers.Abstractions;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Books.Manage.Managers.Abstractions;
 
 public record BookModel
 {
@@ -9,6 +11,7 @@ public record BookModel
     public required string FilePath { get; set; }
     public string? CoverImageSrc { get; set; }
     public string? Description { get; set; }
+    public decimal Price { get; set; }
     public DateTime CreatedDateTime { get; set; }
     public DateTime? UpdatedDate { get; set; }
     public decimal Price { get; set; }
@@ -20,7 +23,28 @@ public record CreateBookModel(
     List<GenreModel>? Genres,
     string FilePath,
     string CoverImageSrc,
-    string? Description);
+    string? Description,
+    decimal Price);
+
+public class CreateBookViewModel
+{
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public string WriterName { get; set; }
+    public List<string> Genres { get; set; }
+    public IFormFile BookFile { get; set; }
+    public IFormFile CoverImage { get; set; }
+    public decimal Price { get; set; }
+}
+
+public class ResultBooksModel
+{
+    public List<string> Genres { get; set; } = new();
+    public required string AuthorName { get; set; }
+    public string? CoverImageSrc { get; set; }
+    public required string Name { get; set; }
+    public decimal Price { get; set; }
+}
 
 public interface IBookManager
 {

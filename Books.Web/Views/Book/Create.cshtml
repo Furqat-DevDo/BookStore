@@ -1,9 +1,17 @@
 ﻿@inject IViewLocalizer Localizer
 @inject IGenreManager Manager
-
+@model CreateBookViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var genres = await Manager.GetGenresAsync();
+    var selectItems = new List<SelectListItem>();
+    if (genres.Any())
+    {
+        foreach (var genre in genres)
+        {
+           selectItems.Add(new SelectListItem { Value = genre.Name, Text = genre.Name }); 
+        }
+    }
 }
 
 <div class="form-container">
@@ -22,16 +30,17 @@
                 </div>
             </div>
 
-
+            <!--TODO-->
             <div class="col-12">
                 <label class="visually-hidden">@Localizer["Genres"]</label>
-                <select class="select">
-                    @foreach (var genre in genres)
-                    {
-                        <option value="@genre.Name">@genre.Name</option>
-                    }
-                </select>
+                <form>
+                    @Html.DropDownList("dropdownbox",selectItems)
+                    <input asp-for="Genres" type="hidden" value="@selectItems"/>
+                    <button class="btn-primary" type="submit">Submit</button>
+                </form>
             </div>
+
+            <input type="hidden" asp-for="Genres" />
 
             <div class="col">
                 <label class="form-label">@Localizer["Book cover image"]</label>
