@@ -10,7 +10,9 @@ public class WriterMapper : IGenericMapper<CreateWriterModel,Writer,WriterModel>
     {
         var writer = new Writer
         {
-            FullName = model.FullName
+            FullName = model.FullName,
+            BirthDate=model.Birthdate,
+            
         };
         return writer;
     }

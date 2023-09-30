@@ -8,12 +8,14 @@ public class WriterModel
     public List<BookSeriesModel>? BookSeries { get; set; }
     public DateTime CreatedDateTime { get; set; }
     public DateTime? UpdatedDate { get; set; }
+    public DateTime BirthDate { get; set; }
 }
 
 public record CreateWriterModel(
     string FullName,
     List<BookModel>? Books,
-    List<BookSeriesModel>? BookSeries);
+    List<BookSeriesModel>? BookSeries,
+    DateTime Birthdate);
 
 public interface IWriterManager
 {
@@ -21,7 +23,7 @@ public interface IWriterManager
     Task<WriterModel> UpdateWriterAsync(int id, CreateWriterModel model);
     Task<bool> DeleteWriterAsync(int id);
     Task<WriterModel> GetWriterByIdAsync(int id);
-    Task<WriterModel> GetWriterByNameAsync(string name);
+    Task<WriterModel> GetWriterByNameAsync(string name,DateTime birthdate);
     Task<IEnumerable<WriterModel>> GetWritersAsync();
     Task<WriterModel> GetOrCreateWriterAsync(string writerName);
 }
