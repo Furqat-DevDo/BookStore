@@ -11,6 +11,7 @@ public record BookModel
     public string? Description { get; set; }
     public DateTime CreatedDateTime { get; set; }
     public DateTime? UpdatedDate { get; set; }
+    public decimal Price { get; set; }
 }
 
 public record CreateBookModel(

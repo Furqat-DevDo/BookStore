@@ -1,5 +1,6 @@
 ﻿using Books.Manage.Managers.Abstractions;
 using Books.Web.Models;
+using Books.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Books.Web.Controllers;
@@ -61,8 +62,8 @@ public class BookController : Controller
     [HttpPost]
     public async Task<IActionResult> Search(SearchModel model)
     {
-
-        if(!ModelState.IsValid)
+        return View();
+        /*if(!ModelState.IsValid)
         {
             return View(model);
         }

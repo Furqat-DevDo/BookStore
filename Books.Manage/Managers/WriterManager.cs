@@ -30,6 +30,8 @@ public class WriterManager : IWriterManager
     {
         await _guardian.GuardAgainstNull(model);
         await _guardian.GuardAgainstNullOrEmptyString(model.FullName);
+        await _guardian.GuardAgainstNullOrEmptyString(model.Birthdate);
+
 
         var entity = await _writerRepository
             .AddAsync(_writerMapper.ToEntity(model));
@@ -58,11 +60,11 @@ public class WriterManager : IWriterManager
 
     }
 
-    public async Task<WriterModel> GetWriterByNameAsync(string name)
+    public async Task<WriterModel> GetWriterByNameAsync(string name,DateOnly birthdate)
     {
         await _guardian.GuardAgainstNullOrEmptyString(name);
 
-        var writer = await _writerRepository.GetAsync(b => b.FullName.Contains(name,
+        var writer = await _writerRepository.GetAsync(b =>b.BirthDate==birthdate && b.FullName.Contains(name,
             StringComparison.CurrentCultureIgnoreCase));
 
         if (writer is not null) return _writerMapper.ToModel(writer);

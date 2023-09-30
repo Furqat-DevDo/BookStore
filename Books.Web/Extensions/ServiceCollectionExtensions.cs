@@ -96,5 +96,5 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ExceptionHandlerMiddleware>();
 
         return services;
-    }
+    }*/
 }

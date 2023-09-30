@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNetCore.Localization
-@model SearchModel
 @inject IViewLocalizer Localizer
 @inject IOptions<RequestLocalizationOptions> localOptions
 
@@ -57,8 +56,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="@Url.Action("Books","Book")">@Localizer["Contact"]</a>
                     </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link active" href="@Url.Action("Create","Book")">@Localizer["Contact"]</a>
+                        <a class="nav-link active" href="@Url.Action("Create","Writer")">@Localizer["Writer"]</a>
                     </li>
                 </ul>
                 
@@ -99,10 +99,10 @@
     <div id="preloader"></div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     <!-- MDB -->
-    <script type="text/javascript"
+<script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
-    <!--Footer-->
-    <footer class="bg-dark text-center text-white" style="bottom: 0; position: fixed; width: 100%; text-align: center; background-color: ActiveBorder; height: 55px; display: flex; justify-content: center; align-items: center;">
+
+<footer class="bg-dark text-center text-white" style="bottom: 0; position: fixed; width: 100%; text-align: center; background-color: ActiveBorder; height: 55px; display: flex; justify-content: center; align-items: center;">
 
         <!-- Grid container -->
         <div class="container p-4 pb-0">

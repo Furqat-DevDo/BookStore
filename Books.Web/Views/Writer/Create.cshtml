@@ -1,0 +1,75 @@
+﻿@model  CreateWriterModel
+@inject IViewLocalizer Localizer
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-container">
+    <form asp-action="Create" asp-controller="Writer" method="post" class="custom-form">
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">
+                    <input type="text" asp-for="FullName" class="form-control" />
+                    <label class="form-label">@Localizer["FullName"]</label>
+                    <span asp-validation-for="FullName"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <input type="datetime" asp-for="Birthdate" class="form-control">
+                    <span asp-validation-for="Birthdate"></span>
+                </div>
+            </div>   
+        </div>
+        <div class="form-control">
+            <button class="btn btn-primary" type="submit" >Create button</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    /* CSS styles specific to the form container */
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    /* CSS styles specific to the form */
+    .custom-form {
+        border: 1px solid black;
+        border-width: 1px;
+        border-style: solid;
+        max-width: 1000px;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        height: 500px;
+        background-color: transparent; /* Set background to transparent */
+        border-radius: 10px; /* Round the corners */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+
+    }
+
+    /* Add your other form element styles here */
+    .form-control {
+        width: 100%;
+        background-color: #f0f0f0; /* Background color */
+        border: none;
+        border-radius: 5px; /* Round the input fields */
+    }
+
+    .select {
+        width: 100%;
+    }
+
+    /* Customize button styles */
+    .btn-primary {
+        background-color: #007bff; /* Button color */
+        border: none;
+        border-radius: 5px; /* Round the button corners */
+        color: #fff; /* Text color */
+    }
+</style>
