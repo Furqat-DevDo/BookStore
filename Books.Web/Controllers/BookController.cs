@@ -1,6 +1,5 @@
 ﻿using Books.Manage.Managers.Abstractions;
 using Books.Web.Models;
-using Books.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Books.Web.Controllers;
@@ -69,7 +68,7 @@ public class BookController : Controller
         }
 
 
-        return RedirectToAction("Books");
+        return RedirectToAction("Books");*/
     }
 
 }
