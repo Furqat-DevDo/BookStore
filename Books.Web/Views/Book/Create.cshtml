@@ -30,7 +30,6 @@
                 </div>
             </div>
 
-            <!--    TODO asp-for    -->
             <div class="col-12 mb-4">
                 <label class="form-label required-label">@Localizer["Book genres"]</label>
                 <select asp-for="Genres" name="genres" id="genres" multiple>
@@ -42,6 +41,13 @@
             </div>
 
             <div class="col">
+                <label class="form-label required-label">@Localizer["Book file"]</label>
+                <div class="form-outline mb-4">
+                    <input asp-for="BookFile" type="file" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col">
                 <label class="form-label">@Localizer["Book cover image"]</label>
                 <div class="form-outline mb-4">
                     <input asp-for="CoverImage" type="file"  class="form-control" />
@@ -49,9 +55,9 @@
             </div>
 
             <div class="col">
-                <label class="form-label required-label">@Localizer["Book file"]</label>
+                <label class="form-label">"Book Price"</label>
                 <div class="form-outline mb-4">
-                    <input asp-for="BookFile" type="file"  class="form-control" />
+                    <input asp-for="Price" type="number" min="0" max="1000000" class="form-control" />
                 </div>
             </div>
             
