@@ -17,49 +17,50 @@
 <div class="form-container">
     <form asp-action="Create" asp-controller="Book" method="post" class="custom-form">
         <div class="row mb-4">
-            <div class="col">
+            <div class="col mb-4">
+                <label class="form-label required-label">@Localizer["Book name"]</label>
                 <div class="form-outline">
-                    <input type="text"  class="form-control" />
-                    <label class="form-label">@Localizer["Book name"]</label>
+                    <input asp-for="Name" type="text" class="form-control" placeholder="Name of the book" />
                 </div>
             </div>
-            <div class="col">
+            <div class="col mb-4">
+                <label class="form-label required-label">@Localizer["Writer name"]</label>
                 <div class="form-outline">
-                    <input type="text" class="form-control" />
-                    <label class="form-label">@Localizer["Writer Name"]</label>
+                    <input asp-for="WriterName" type="text" class="form-control" placeholder="Name of the book writer" />
                 </div>
             </div>
 
-            <!--TODO-->
-            <div class="col-12">
-                <label class="visually-hidden">@Localizer["Genres"]</label>
-                <form>
-                    @Html.DropDownList("dropdownbox",selectItems)
-                    <input asp-for="Genres" type="hidden" value="@selectItems"/>
-                    <button class="btn-primary" type="submit">Submit</button>
-                </form>
+            <!--    TODO asp-for    -->
+            <div class="col-12 mb-4">
+                <label class="form-label required-label">@Localizer["Book genres"]</label>
+                <select asp-for="Genres" name="genres" id="genres" multiple>
+                    @foreach (var item in selectItems)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
             </div>
-
-            <input type="hidden" asp-for="Genres" />
 
             <div class="col">
                 <label class="form-label">@Localizer["Book cover image"]</label>
                 <div class="form-outline mb-4">
-                    <input type="file"  class="form-control" />
+                    <input asp-for="CoverImage" type="file"  class="form-control" />
                 </div>
             </div>
 
             <div class="col">
-                <label class="form-label">@Localizer["Book file"]</label>
+                <label class="form-label required-label">@Localizer["Book file"]</label>
                 <div class="form-outline mb-4">
-                    <input type="file"  class="form-control" />
+                    <input asp-for="BookFile" type="file"  class="form-control" />
                 </div>
             </div>
-            <div class="form-outline mb-4 col-12">
-                <textarea class="form-control" rows="4"></textarea>
+            
+            <div class="mb-4 col-12">
                 <label class="form-label">@Localizer["Description"]</label>
+                <textarea asp-for="Description" class="form-control" rows="6" placeholder="Some information about the book"></textarea>
             </div>
-            <div class="col text-center"> <!-- Center the button within the form -->
+            
+            <div class="col text-center">
                 <button type="submit" class="btn btn-primary">@Localizer["Create"]</button>
             </div>
         </div>
@@ -70,9 +71,9 @@
     /* CSS styles specific to the form container */
     .form-container {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+        justify-content: space-around;
+        margin-top: 15px;
+        margin-bottom : 25px;
     }
 
     /* CSS styles specific to the form */
@@ -82,9 +83,10 @@
         border-style: solid;
         max-width: 1000px;
         width: 100%;
-        padding: 20px;
+        padding: 25px;
+        padding-bottom: 5px;
         box-sizing: border-box;
-        height: 500px;
+        height: fit-content;
         background-color: transparent; /* Set background to transparent */
         border-radius: 10px; /* Round the corners */
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
@@ -95,8 +97,8 @@
     .form-control {
         width: 100%;
         background-color: #f0f0f0; /* Background color */
-        border: none;
         border-radius: 5px; /* Round the input fields */
+        resize: none;
     }
 
     .select {
@@ -109,5 +111,16 @@
         border: none;
         border-radius: 5px; /* Round the button corners */
         color: #fff; /* Text color */
+        width:25%;
+        font-size: 14px;
     }
-</style>*@
+
+    .required-label::before {
+        content: "*";
+        color: red; /* Customize the color */
+        margin-right: 4px; /* Add some spacing between the asterisk and the label text */
+    }
+</style>
+
+
+

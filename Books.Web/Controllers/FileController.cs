@@ -13,7 +13,6 @@ public class FileController : Controller
     }
 
     [HttpPost("Upload")]
-
     public async Task<IActionResult> Upload(IFormFile model, string returnUrl)
     {
         if (ModelState.IsValid)

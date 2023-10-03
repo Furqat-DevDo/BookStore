@@ -46,14 +46,13 @@ public class BookController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateBookViewModel model)
+    public async Task<IActionResult> Create(BookCreateViewModel model)
     {
         if(!ModelState.IsValid)
             return View(model);
 
-        //var newBook = await _bookManager.CreateBookAsync(model);
-        //return RedirectToAction("About", newBook);
-        throw new Exception();
+        
+        return RedirectToAction("About");
     }
 
     [HttpGet]
