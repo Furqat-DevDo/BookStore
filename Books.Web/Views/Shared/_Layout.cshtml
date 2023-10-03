@@ -26,65 +26,70 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
           rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/vapor.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
-<header id="header" id="home">
+    <header id="header" id="home">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <button class="navbar-toggler"
-                    type="button"
-                    data-mdb-toggle="collapse"
-                    data-mdb-target="#navbarTogglerDemo03"
-                    aria-controls="navbarTogglerDemo03"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
-            <a class="navbar-brand" href="#"><i class="fas fa-house"></i></a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active">@Localizer["Authors"]</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="@Url.Action("Files", "File")">@Localizer["Categories"]</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="@Url.Action("Books","Book")">@Localizer["Contact"]</a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link active" href="@Url.Action("Create","Writer")">@Localizer["Writer"]</a>
-                    </li>
-                </ul>
-                
-                <!--
-                DropDown
-                -->
-                
-                <div class="btn-group">
-                    <button type="button" class="btn btn-tertiary"
-                            style="width:auto; -webkit-text-fill-color:white"
-                            data-mdb-toggle="dropdown">
-                        @Localizer.GetString(culture!.RequestCulture.UICulture.Name)
-                    </button>
-                    <ul class="dropdown-menu">
-                        @foreach (var cult in cultures)
-                        {
-                            <li><a type="submit" href="@Url.Action("ChangeCulture","Root",new{culture = cult.Value, returnUrl})" class="dropdown-item">@cult.Text</a></li>
-                            <li><hr class="dropdown-divider"/></li>
-                        }
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler"
+                        type="button"
+                        data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarTogglerDemo03"
+                        aria-controls="navbarTogglerDemo03"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#"><i class="fas fa-house"></i></a>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active">@Localizer["Authors"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("Files", "File")">@Localizer["Categories"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("Books","Book")">@Localizer["Contact"]</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="@Url.Action("Create","Writer")">@Localizer["Writer"]</a>
+                        </li>
                     </ul>
+
+                    <!--
+                    DropDown
+                    -->
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-tertiary"
+                                style="width:auto; -webkit-text-fill-color:white"
+                                data-mdb-toggle="dropdown">
+                            @Localizer.GetString(culture!.RequestCulture.UICulture.Name)
+                        </button>
+                        <ul class="dropdown-menu">
+                            @foreach (var cult in cultures)
+                            {
+                                <li><a type="submit" href="@Url.Action("ChangeCulture","Root",new{culture = cult.Value, returnUrl})" class="dropdown-item">@cult.Text</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                            }
+                        </ul>
+                    </div>
+                    <form class="d-flex">
+                        <input class="form-control me-sm-2" type="search" placeholder="Search">
+                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </div>
-                
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 
     <div class="container">
 
@@ -99,10 +104,10 @@
     <div id="preloader"></div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     <!-- MDB -->
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
 
-<footer class="bg-dark text-center text-white" style="bottom: 0; position: fixed; width: 100%; text-align: center; background-color: ActiveBorder; height: 55px; display: flex; justify-content: center; align-items: center;">
+    <footer class="bg-dark text-center text-white" style="bottom: 0; position: fixed; width: 100%; text-align: center; background-color: ActiveBorder; height: 55px; display: flex; justify-content: center; align-items: center;">
 
         <!-- Grid container -->
         <div class="container p-4 pb-0">
