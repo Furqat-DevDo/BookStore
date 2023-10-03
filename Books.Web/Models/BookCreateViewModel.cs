@@ -8,10 +8,10 @@ public class BookCreateViewModel
     public required string Name { get; set; }
 
 
-    public string Description { get; set; }
+    public string? Description { get; set; }
     public required string WriterName { get; set; }
     public required List<string> Genres { get; set; }
-    public required IFormFile BookFile { get; set; }
-    public IFormFile CoverImage { get; set; }
+    public required string BookFileSrc { get; set; }
+    public required string CoverImageSrc { get; set; }
     public  decimal Price { get; set; }
 }

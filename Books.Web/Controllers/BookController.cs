@@ -28,7 +28,7 @@ public class BookController : Controller
     }
 
     [HttpPost]
-    public IActionResult Books(BookModel books)
+    public IActionResult Books(ResultBooksModel books)
     {
         return View(books);
     }

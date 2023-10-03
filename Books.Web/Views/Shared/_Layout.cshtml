@@ -29,7 +29,7 @@
           rel="stylesheet" />
     <link rel="stylesheet" 
         href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
-    
+    <link href=@Url.Content("~/css/book.css") asp-append-version="true" rel="stylesheet"/>
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -54,7 +54,7 @@
                         <a class="nav-link active">@Localizer["Authors"]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="@Url.Action("Files", "File")">@Localizer["Categories"]</a>
+                        <a class="nav-link active" href="@Url.Action("Upload", "File")">@Localizer["Categories"]</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="@Url.Action("Books","Book")">@Localizer["Contact"]</a>
@@ -103,7 +103,9 @@
     <div id="preloader"></div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     <!-- MDB -->
-<script type="text/javascript"
+
+    <script src="~/Js/upload-file.js" ></script>
+    <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
     
     <script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
