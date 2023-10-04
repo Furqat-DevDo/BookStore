@@ -30,6 +30,7 @@ public class BookManager : IBookManager
     public async Task<BookModel> CreateBookAsync(CreateBookModel model)
     {
         await _guardian.GuardAgainstNull(model);
+        
 
         var entity = await _repository.AddAsync(
             _mapper.ToEntity(model));

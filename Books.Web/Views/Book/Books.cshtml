@@ -1,9 +1,9 @@
-﻿@model BookModel
+﻿@model ResultBooksModel
 
 @inject IViewLocalizer Localizer
 
 @{
-    List<BookModel> books = new();
+    List <ResultBooksModel> books = new();
 }
 
 <table class="table align-middle mb-0 bg-white" >
@@ -20,34 +20,34 @@
         @foreach (var book in books)
         {
             <tr>
-            <td>
-                <div class="d-flex align-items-center">
-                    <img src="@book.CoverImageSrc"
-                         alt=""
-                         style="width: 45px; height: 45px"
-                         class="rounded-circle"/>
-                    <div class="ms-3">
-                        <p class="fw-bold mb-1">@book.Name</p>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <p class="fw-normal mb-1"></p>
-            </td>
                 <td>
-                    @foreach (var genre in book.Genres)
-                    {
-                        <span class="badge badge-success rounded-pill d-inline">@genre</span>
-                    }
-                    
+                    <div class="d-flex align-items-center">
+                        <img src="@book.CoverImageSrc"
+                             alt=""
+                             style="width: 45px; height: 45px"
+                             class="rounded-circle"/>
+                        <div class="ms-3">
+                            <p class="fw-bold mb-1">@book.Name</p>
+                        </div>
+                    </div>
                 </td>
-            <td></td>
-            <td>
-                <button type="button" class="btn btn-link btn-sm btn-rounded">
-                    @Url.Action()
-                </button>
-            </td>
-        </tr>
+                <td>
+                    <p class="fw-normal mb-1">@book.</p>
+                </td>
+                    <td>
+                        @foreach (var genre in book.Genres)
+                        {
+                            <span class="badge badge-success rounded-pill d-inline">@genre</span>
+                        }
+                    
+                    </td>
+                <td>@book.Price</td>
+                <td>
+                    <button type="button" class="btn btn-link btn-sm btn-rounded">
+                        @Url.Action()
+                    </button>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

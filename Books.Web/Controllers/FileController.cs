@@ -12,10 +12,11 @@ public class FileController : Controller
         _webHostEnvironment = webHostEnvironment;
     }
 
-    [HttpPost("Upload")]
-
-    public async Task<IActionResult> Upload(IFormFile model, string returnUrl)
+    [HttpPost]
+    public async Task<JsonResult> Upload(IFormFile file)
     {
+        string filePath = string.Empty;
+
         if (ModelState.IsValid)
         {
             try
@@ -26,27 +27,27 @@ public class FileController : Controller
                     Directory.CreateDirectory(uploadsFolder);
                 }
 
-                string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                string uniqueFileName = Guid.NewGuid() + "_" + file.FileName;
+                filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
                 await using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await model.CopyToAsync(stream);
+                    await file.CopyToAsync(stream);
                 }
 
                 ViewBag.Message = "File uploaded successfully!";
             }
             catch (Exception ex)
             {
-                ViewBag.Message = "Error: " + ex.Message;
+                return Json("Error: " + ex.Message);
             }
         }
 
-        return RedirectToAction(returnUrl);
+        return Json(filePath);
     }
 
-    [HttpGet("Download")]
-    public IActionResult DownloadFile(string fileSrc)
+    [HttpGet]
+    public IActionResult Download(string fileSrc)
     {
         if (string.IsNullOrEmpty(fileSrc))
         {

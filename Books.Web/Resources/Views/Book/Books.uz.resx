@@ -129,6 +129,9 @@
   <data name="Price" xml:space="preserve">
     <value>Narxi</value>
   </data>
+  <data name="Write name of your book" xml:space="preserve">
+    <value>Kitob nomini yozing</value>
+  </data>
   <data name="Writers" xml:space="preserve">
     <value>Yozuvchilar</value>
   </data>

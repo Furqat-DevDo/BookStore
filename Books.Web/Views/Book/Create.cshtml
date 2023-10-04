@@ -1,104 +1,81 @@
 ﻿@inject IViewLocalizer Localizer
 @inject IGenreManager Manager
+@model BookCreateViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
     var genres = await Manager.GetGenresAsync();
+    var selectItems = new List<SelectListItem>();
+
+    if (genres.Any())
+    {
+        foreach (var genre in genres)
+        {
+           selectItems.Add(new SelectListItem { Value = genre.Name, Text = genre.Name }); 
+        }
+    }
 }
 
 <div class="form-container">
     <form asp-action="Create" asp-controller="Book" method="post" class="custom-form">
         <div class="row mb-4">
-            <div class="col">
+            <div class="col mb-4">
+                <label class="form-label required-label">@Localizer["Book name"]</label>
                 <div class="form-outline">
-                    <input type="text"  class="form-control" />
-                    <label class="form-label">@Localizer["Book name"]</label>
+                    <input asp-for="Name" type="text" class="form-control" placeholder="Name of the book" />
                 </div>
             </div>
-            <div class="col">
+            <div class="col mb-4">
+                <label class="form-label required-label">@Localizer["Writer name"]</label>
                 <div class="form-outline">
-                    <input type="text" class="form-control" />
-                    <label class="form-label">@Localizer["Writer Name"]</label>
+                    <input asp-for="WriterName" type="text" class="form-control" placeholder="Name of the book writer" />
                 </div>
             </div>
 
-
-            <div class="col-12">
-                <label class="visually-hidden">@Localizer["Genres"]</label>
-                <select class="select">
-                    @foreach (var genre in genres)
+            <div class="col-12 mb-4">
+                <label class="form-label required-label">@Localizer["Book genres"]</label>
+                <select asp-for="Genres" name="genres" id="genres" multiple>
+                    @foreach (var item in selectItems)
                     {
-                        <option value="@genre.Name">@genre.Name</option>
+                        <option value="@item.Value">@item.Text</option>
                     }
                 </select>
             </div>
 
             <div class="col">
-                <label class="form-label">@Localizer["Book cover image"]</label>
+                <label class="form-label required-label">@Localizer["Book CoverImage"]</label>
                 <div class="form-outline mb-4">
-                    <input type="file"  class="form-control" />
+                    <input type="file" id="model1" name="file" class="form-control" />
+                    <input type="hidden" id="CoverImageSrc" name="CoverImageSrc" asp-for="CoverImageSrc" />
+                    <button id="uploadButton" class="btn btn-primary" type="button">@Localizer["Upload"]</button>
                 </div>
             </div>
 
             <div class="col">
-                <label class="form-label">@Localizer["Book file"]</label>
+                <label class="form-label required-label">@Localizer["Book file"]</label>
                 <div class="form-outline mb-4">
-                    <input type="file"  class="form-control" />
+                    <input type="file" id="model2" name="file" class="form-control" />
+                    <input type="hidden" id="BookFileSrc" name="BookFileSrc" asp-for="BookFileSrc" />
+                    <button id="uploadButton2" class="btn btn-primary" type="button">@Localizer["Upload"]</button>
                 </div>
             </div>
-            <div class="form-outline mb-4 col-12">
-                <textarea class="form-control" rows="4"></textarea>
-                <label class="form-label">@Localizer["Description"]</label>
+
+            <div class="col">
+                <label class="form-label">"Book Price"</label>
+                <div class="form-outline mb-4">
+                    <input asp-for="Price" type="number" min="0" max="1000000" class="form-control" />
+                </div>
             </div>
-            <div class="col text-center"> <!-- Center the button within the form -->
+            
+            <div class="mb-4 col-12">
+                <label class="form-label">@Localizer["Description"]</label>
+                <textarea asp-for="Description" class="form-control" rows="6" placeholder="Some information about the book"></textarea>
+            </div>
+            
+            <div class="col text-center">
                 <button type="submit" class="btn btn-primary">@Localizer["Create"]</button>
             </div>
         </div>
     </form>
 </div>
-
-<style>
-    /* CSS styles specific to the form container */
-    .form-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    /* CSS styles specific to the form */
-    .custom-form {
-        border: 1px solid black;
-        border-width: 1px;
-        border-style: solid;
-        max-width: 1000px;
-        width: 100%;
-        padding: 20px;
-        box-sizing: border-box;
-        height: 500px;
-        background-color: transparent; /* Set background to transparent */
-        border-radius: 10px; /* Round the corners */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-        
-    }
-
-    /* Add your other form element styles here */
-    .form-control {
-        width: 100%;
-        background-color: #f0f0f0; /* Background color */
-        border: none;
-        border-radius: 5px; /* Round the input fields */
-    }
-
-    .select {
-        width: 100%;
-    }
-
-    /* Customize button styles */
-    .btn-primary {
-        background-color: #007bff; /* Button color */
-        border: none;
-        border-radius: 5px; /* Round the button corners */
-        color: #fff; /* Text color */
-    }
-</style>*@
