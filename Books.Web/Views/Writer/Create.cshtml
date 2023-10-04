@@ -11,13 +11,14 @@
             <div class="col">
                 <div class="form-outline">
                     <input type="text" asp-for="FullName" class="form-control" />
-                    <label class="form-label">@Localizer["FullName"]</label>
-                    <span asp-validation-for="FullName"></span>
+                    <label class="form-label text-light">@Localizer["FullName"]</label>
+                    <span  asp-validation-for="FullName"></span>
                 </div>
             </div>
             <div class="col">
-                <div class="form-group">
-                    <input type="datetime" asp-for="Birthdate" class="form-control">
+                <div class="form-outline">
+                    <input type="datetime" asp-for="Birthdate" class="form-control" />
+                    <label class="form-label text-light">@Localizer["Birthdate"]</label>
                     <span asp-validation-for="Birthdate"></span>
                 </div>
             </div>   
@@ -34,7 +35,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        height: 80vh;
     }
 
     /* CSS styles specific to the form */
@@ -46,7 +47,7 @@
         width: 100%;
         padding: 20px;
         box-sizing: border-box;
-        height: 500px;
+        height: 450px;
         background-color: transparent; /* Set background to transparent */
         border-radius: 10px; /* Round the corners */
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
@@ -56,9 +57,11 @@
     /* Add your other form element styles here */
     .form-control {
         width: 100%;
-        background-color: #f0f0f0; /* Background color */
+        background-color: #007bff; /* Background color */
         border: none;
         border-radius: 5px; /* Round the input fields */
+        color : black ;
+        text-align: center;
     }
 
     .select {
@@ -71,5 +74,6 @@
         border: none;
         border-radius: 5px; /* Round the button corners */
         color: #fff; /* Text color */
+        
     }
 </style>
