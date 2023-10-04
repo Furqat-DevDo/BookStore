@@ -129,7 +129,7 @@
   <data name="Price" xml:space="preserve">
     <value>Narxi</value>
   </data>
-  <data name="Writers" xml:space="preserve">
-    <value>Yozuvchilar</value>
+  <data name="Writer" xml:space="preserve">
+    <value>Yozuvchi</value>
   </data>
 </root>

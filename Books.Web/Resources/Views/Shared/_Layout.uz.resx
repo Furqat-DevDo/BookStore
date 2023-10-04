@@ -138,4 +138,7 @@
   <data name="uz-Latn" xml:space="preserve">
     <value>O'zbek Tili</value>
   </data>
+  <data name="Writers" xml:space="preserve">
+    <value>Yozuvchi</value>
+  </data>
 </root>

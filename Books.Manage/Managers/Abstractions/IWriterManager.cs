@@ -1,4 +1,6 @@
-﻿namespace Books.Manage.Managers.Abstractions;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Books.Manage.Managers.Abstractions;
 
 public class WriterModel
 {
@@ -9,13 +11,15 @@ public class WriterModel
     public DateTime CreatedDateTime { get; set; }
     public DateTime? UpdatedDate { get; set; }
     public DateTime BirthDate { get; set; }
+    public required string WriterImage { get; set; }
 }
 
 public record CreateWriterModel(
     string FullName,
     List<BookModel>? Books,
     List<BookSeriesModel>? BookSeries,
-    string Birthdate);
+    string Birthdate,
+    string WriterImage);
 
 public interface IWriterManager
 {

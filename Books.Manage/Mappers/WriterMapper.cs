@@ -15,7 +15,7 @@ public class WriterMapper : IGenericMapper<CreateWriterModel,Writer,WriterModel>
         {
             FullName = model.FullName,
             BirthDate= date,
-            
+            WriterImage=model.WriterImage,
         };
         return writer;
     }
@@ -28,6 +28,7 @@ public class WriterMapper : IGenericMapper<CreateWriterModel,Writer,WriterModel>
             FullName = entity.FullName,
             CreatedDateTime = entity.CreatedDate,
             UpdatedDate = entity.UpdatedDate,
+            WriterImage = entity.WriterImage
         };
         return model;
     }
@@ -35,6 +36,7 @@ public class WriterMapper : IGenericMapper<CreateWriterModel,Writer,WriterModel>
     public Writer Update(Writer writer, CreateWriterModel model)
     {
         writer.FullName = model.FullName;
+        writer.WriterImage = model.WriterImage;
 
         return writer;
     }

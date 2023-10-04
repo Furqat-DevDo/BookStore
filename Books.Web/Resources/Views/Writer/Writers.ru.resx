@@ -117,28 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Authors" xml:space="preserve">
-    <value>Авторы</value>
+  <data name="BirthDate" xml:space="preserve">
+    <value>Дата рождения</value>
   </data>
-  <data name="Categories" xml:space="preserve">
-    <value>Категории</value>
+  <data name="Create button" xml:space="preserve">
+    <value>Создать кнопку</value>
   </data>
-  <data name="Contact" xml:space="preserve">
-    <value>Связаться с нами</value>
-  </data>
-  <data name="en-US" xml:space="preserve">
-    <value>Английский</value>
-  </data>
-  <data name="ru-RU" xml:space="preserve">
-    <value>Русский</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>Поиск</value>
-  </data>
-  <data name="uz-Latn" xml:space="preserve">
-    <value>Узбекский</value>
-  </data>
-  <data name="Writers" xml:space="preserve">
-    <value>Писатели</value>
+  <data name="FullName" xml:space="preserve">
+    <value>Полное имя</value>
   </data>
 </root>
