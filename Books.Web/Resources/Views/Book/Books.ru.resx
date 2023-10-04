@@ -129,7 +129,7 @@
   <data name="Price" xml:space="preserve">
     <value>Цена</value>
   </data>
-  <data name="Writers" xml:space="preserve">
+  <data name="Writer" xml:space="preserve">
     <value>Писатели</value>
   </data>
 </root>

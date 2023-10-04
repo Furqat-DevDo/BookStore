@@ -29,11 +29,18 @@ public class WriterController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CreateWriterModel model)
     {
-        if (!ModelState.IsValid)
-            return View(model);
+        try
+        {
+            if (!ModelState.IsValid)
+                return View(model);
 
-        var newWriter = await _writerManager.CreateWriterAsync(model);
-        return RedirectToAction("About", newWriter);
+            var newWriter = await _writerManager.CreateWriterAsync(model);
+            return RedirectToAction("About", newWriter);
+        }
+        catch (Exception ex)
+        {
+            return View("Error", ex);
+        }
     }
 
 }
